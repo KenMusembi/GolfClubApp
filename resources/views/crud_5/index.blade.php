@@ -111,7 +111,7 @@
         </div>
         <div class="modal-body">
             {{$member->club_name}},
-            Mamba Club
+            
             <input type="hidden" name="hiddenValue" id="hiddenValue" value="" />
         </div>
         <div class="modal-footer">
