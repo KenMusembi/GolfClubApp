@@ -12,7 +12,10 @@
 
 */
 Route::group(['prefix' => 'laravel-crud-search-sort-ajax-modal-form'], function () {
-    Route::get('/', 'Crud5Controller@index');
+   
+	Route::get('/', 'Crud5Controller@index');
+	 Toastr()->info('Welcome To the site', 'Welcome', 
+	["closeButton" => "true"]);
     Route::match(['get', 'post'], 'create', 'Crud5Controller@create');
       Route::match(['get', 'post'], 'view', 'Crud5Controller@enroll');
     Route::match(['get', 'put'], 'update/{id}', 'Crud5Controller@update');
@@ -30,7 +33,8 @@ Route::get ( '/', function(){
   return view('welcome');
 });
 
+Route::get('/', function () {
+    Toastr()->info('Messages in here', 'Title', ["closeButton" => "true"]);
 
-
-
-Route::get('/home', 'HomeController@index')->name('home');
+    return view('welcome');
+});

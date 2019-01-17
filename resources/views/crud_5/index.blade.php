@@ -1,4 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    </head>
+    <body>
+       
+		<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+        <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+        {!! Toastr::message('Welcome') !!}
+    </body>
+</html>
 <div class="container">
+
     <div class="float-right">
         <a href="#modalForm" data-toggle="modal" data-href="{{url('laravel-crud-search-sort-ajax-modal-form/create')}}"
            class="btn btn-primary">New</a>
