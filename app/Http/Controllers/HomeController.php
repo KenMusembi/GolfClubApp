@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+use Yajra\Datatables\Datatables;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $users = User::all();
+        return view('home', compact('users'));
     }
+
+    public function getUsers(){
+      return DataTables::of(User::query())
+
+        ->setRowClass('{{ $id % 2 == 0 ? "alert-success" : "alert-warning" }}')
+      ->setRowId(function ($user) {
+          return $user->id;
+      })
+      ->setRowAttr(['align' => 'center'])
+      ->setRowData(['data-name' => 'row-{{$name}}',])
+
+      ->make(true);
+    }
+
 }

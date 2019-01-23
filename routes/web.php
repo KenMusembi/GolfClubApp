@@ -1,5 +1,6 @@
 <?php
 
+use App\DataTables\UsersDataTable;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -9,32 +10,32 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-
 */
-Route::group(['prefix' => 'laravel-crud-search-sort-ajax-modal-form'], function () {
-   
-	Route::get('/', 'Crud5Controller@index');
-	 Toastr()->info('Welcome To the site', 'Welcome', 
-	["closeButton" => "true"]);
-    Route::match(['get', 'post'], 'create', 'Crud5Controller@create');
-      Route::match(['get', 'post'], 'view', 'Crud5Controller@enroll');
-    Route::match(['get', 'put'], 'update/{id}', 'Crud5Controller@update');
-    Route::delete('delete/{id}', 'Crud5Controller@delete');
-	
-	Auth::routes();
+//Route::get('notification', 'UsersController@notification');
+
+Route::get('welcome', 'UsersController@index')->name('welcome');
+Route::get('welcome/getdata', 'UsersController@getdata')->name('welcome.getdata');
+
+Route::post('welcome/postdata', 'UsersController@postdata')->name('welcome.postdata');
+
+Route::get('welcome/fetchdata', 'UsersController@fetchdata')->name('welcome.fetchdata');
+Route::get('welcome/removedata', 'UsersController@removedata')->name('welcome.removedata');
+Route::get('welcome/viewclubs', 'UsersController@viewclubs')->name('welcome.viewclubs');
+
+Route::get('/', function (UsersDataTable $dataTable  ) {
+    return $dataTable->render('index');
 });
 
-Route::get ( '/test', 'TestController@test_query');
+Auth::routes();
 
-Route::get ( '/testView', function(){
-  return view('test');
+Route::get('/home', function(){
+  return view('home');
 });
-Route::get ( '/', function(){
-  return view('welcome');
-});
+
+Route::resource('users', 'UsersController');
+Route::resource('clubs', 'ClubsController');
 
 Route::get('/', function () {
-    Toastr()->info('Messages in here', 'Title', ["closeButton" => "true"]);
-
+  Toastr::success('Messages in here', 'Title', ["positionClass" => "toast-top-center"]);
     return view('welcome');
 });
