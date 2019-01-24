@@ -10,7 +10,7 @@ use DB;
 use Validator;
 use App\User;
 use App\Clubs;
-use ClubsReistration;
+use App\ClubsRegistration;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -47,6 +47,7 @@ function index()
         return '<a href="#" class="btn btn-xs btn-primary edit" id="'.$user->id.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
         <a href="#" class="btn btn-xs btn-danger delete" id="'.$user->id.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>
        <a href="#" class="btn btn-xs btn-success view" id="'.$user->id.'"><i class="glyphicon glyphicon-user"></i> ViewClub</a>
+       <a href="#" class="btn btn-xs btn-warning enroll" id="'.$user->id.'"><i class="glyphicon glyphicon-plus"></i> Enroll</a>
        ';
     })->make(true);
     }
@@ -137,7 +138,49 @@ function index()
 
          return response()->json(['data' => $userclubs]);
         //return view('welcome/viewclubs');
+   }
 
+   function enrollData(Request $request)
+   {
+      $id = $request->input('id');
+     $usercluby = User::find($id);
+        $output = array(
+          'enroll_user_id' => $usercluby->name,
+        );
+        echo json_encode($output);
+   }
+
+
+   function enroll(Request $request)
+   {
+       $error_array = array();
+       $success_output = '';
+           if($request->get('club_action') == 'Mara')
+           {
+             $user = new User([
+                 'name'    =>  'jojo',
+                 'email'     =>  'mail@gmaol.com',
+                 'password'  => 'Teranovas21'
+             ]);
+               $user->save();
+             $success_output = '<div class="alert alert-success">Data Inserted</div>';
+               //<script>toastr.success('User Already Deleted', 'User Deleted')</script>
+           }
+
+           if($request->get('button_action') == 'update')
+           {
+               $user_club = ClubsRegistration::find($request->get('user_id'));
+               $user_club->user_id = $request->get('user_id');
+               $user_club->club_id = $request->get('club_id');
+               $user_club->save();
+               $success_output = '<div class="alert alert-success">Data Updated</div>';
+       }
+
+       $output = array(
+           'error'     =>  $error_array,
+           'success'   =>  $success_output
+       );
+       echo json_encode($output);
    }
 
 }

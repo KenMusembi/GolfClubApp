@@ -21,6 +21,9 @@ Route::post('welcome/postdata', 'UsersController@postdata')->name('welcome.postd
 Route::get('welcome/fetchdata', 'UsersController@fetchdata')->name('welcome.fetchdata');
 Route::get('welcome/removedata', 'UsersController@removedata')->name('welcome.removedata');
 Route::get('welcome/viewclubs', 'UsersController@viewclubs')->name('welcome.viewclubs');
+Route::get('welcome/enroll', 'UsersController@enroll')->name('welcome.enroll');
+Route::get('welcome/enrollData', 'UsersController@enrollData')->name('welcome.enrollData');
+
 
 //Route::get('/', function (UsersDataTable $dataTable  ) {
     //return $dataTable->render('index');
@@ -35,6 +38,6 @@ Route::get('/home', function(){
 Route::resource('users', 'UsersController');
 Route::resource('clubs', 'ClubsController');
 
-Route::get('/', function () {  
+Route::get('/', function () {
     return view('welcome');
 });

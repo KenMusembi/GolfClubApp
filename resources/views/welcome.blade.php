@@ -42,12 +42,13 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th style="width:210px" >Action</th>
+                <th style="width:275px" style="align:center">Action</th>
             </tr>
         </thead>
     </table>
 </div>
 
+<!-- Modal of edit and add -->
 <div id="userModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -83,6 +84,7 @@
     </div>
 </div>
 
+<!-- Modal of view -->
 <div class="modal" id="view" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -99,6 +101,45 @@
       </div>
     </div>
   </div>
+</div>
+
+<!-- Modal of enroll -->
+<div id="enroll" class="modal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="post" id="enroll_form">
+                <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal">&times;</button>
+                   <h4 class="modal-title">Enroll To Club</h4>
+                </div>
+                <div class="modal-body">
+                    {{csrf_field()}}
+                    <span id="form_output"></span>
+                    <div class="form-group">
+                        <label>Enroll User</label>
+                        <input type="integer" name="enroll_user_id" id="enroll_user_id" class="form-control" />
+                    </div>
+
+                    <div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle Mara" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Choose Club
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <button type="button" class="dropdown-item btn btn-secondary Mara" id="club_action" value="Mara" >Mara Club</button>
+    <button type="button" class="dropdown-item btn btn-secondary" id="club_action" value="Maasai" >Maasai Club</button>
+    <button type="button" class="dropdown-item btn btn-secondary" id="club_action" value="Mamba" >Mamba Club</button>
+  </div>
+</div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="user_id" id="user_id" value="" />
+                    <input type="hidden" name="club_action" id="club_action" value="" />
+                    <input type="submit" name="enrollsubmit" id="enrollsubmit" value="Enroll" class="btn btn-info" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -157,6 +198,7 @@ $(document).ready(function() {
             }
         })
     });
+
     $(document).on('click', '.edit', function(){
             var id = $(this).attr("id");
             $('#form_output').html('');
@@ -236,6 +278,54 @@ $(".modal-body").text(data.data[0].clubs);
 $('#user_table').on( 'open.dt', function () {
 toastr.info('Users are being Processsed', 'Please Wait')
 } );
+
+//addint script for enroll
+$(document).on('click', '.enroll', function(){
+  var id = $(this).attr("id");
+         $('#form_output').html('');
+         $.ajax({
+             url:"{{route('welcome.enrollData')}}",
+             method:'get',
+             data:{id:id},
+             dataType:'json',
+             success:function(data)
+             {
+               $('#enroll_user_id').val(data.enroll_user_id);
+                     $('#enroll_club_id').val(data.enroll_club_id);
+                     $('#user_id').val(id);
+                     $('#enroll').modal('show');
+                     $('#action').val('Enroll');
+                     $('.modal-title').text('Enroll');
+                     //add method for taking in the club
+      }
+
+    })  });
+
+//    $(document).on('click', '#Mara_Club', function(){
+//            alert('hey');
+//    })
+$(document).on('click', '.Mara', function(){
+        var id = $(this).attr("id");
+        $('#form_output').html('');
+        $.ajax({
+            url:"{{route('welcome.enroll')}}",
+            method:'get',
+            data:{id:id},
+            dataType:'json',
+            success:function(data)
+            {
+
+                $('#user_id').val(id);
+                $('#enroll').modal('show');
+                $('#action').val('Mara');
+              //  $('.modal-title').text('Edit Data');
+                $('#club_action').val('Mara');
+
+            }
+        })
+    });
+
+
 
 } );
     </script>
