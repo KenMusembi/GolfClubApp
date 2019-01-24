@@ -26,15 +26,12 @@
       <script src="https://cdn.datatables.net/buttons/1.5.0/js/buttons.bootstrap.min.js"></script>
 
       <script src="{{asset('js/editor.bootstrap.min.js')}}"></script>
-
-
 </head>
 <body>
 
+
 <div class="container">
-    <br />
     <h3 align="center">Golf Club App</h3>
-    <br />
     <div align="right">
         <button type="button" name="add" id="add_data" class="btn btn-success btn-sm">Add</button>
     </div>
@@ -95,16 +92,15 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-
+      <div class="modal-body">{{csrf_field()}}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-
       </div>
     </div>
   </div>
 </div>
+
 <script type="text/javascript">
 $(document).ready(function() {
      $('#user_table').DataTable({
@@ -150,6 +146,7 @@ $(document).ready(function() {
                 }
                 else
                 {
+                  toastr.success('User Data Edited', 'User Edit Succesfull')
                     $('#form_output').html(data.success);
                     $('#user_form')[0].reset();
                     $('#action').val('Add');
@@ -170,6 +167,7 @@ $(document).ready(function() {
                 dataType:'json',
                 success:function(data)
                 {
+                  toastr.warning('About to Edit User, changes will be permanent', 'User Edit')
                     $('#name').val(data.name);
                     $('#email').val(data.email);
                     $('#user_id').val(id);
@@ -221,32 +219,22 @@ toastr.success('User Already Deleted', 'User Deleted')
                   success:function(data)
                   {
                     console.log(data),
-
+toastr.success('Viewing User Clubs', 'Succesfull!')
                 $('#user_name').val(data.user_name);
                 $('#club_name').val(data.club_name);
-                $('#save').val("view");
+                $('#action').val("view");
                 $('#view').modal('show');
+                $('.modal-title').text('View Clubs');
+                $('#button_action').val('view');
               //  var data = $(this).serializeObject();
-   json_data = JSON.stringify(data);
-   obj= JSON.parse(json_data);
+   //json_data = JSON.stringify(data);
+  // obj= JSON.parse(json_data);
    //document.getElementById("view").innerHTML = json_data.club_name;
-$(".modal-body").text(json_data);
+$(".modal-body").text(data.data[0].clubs);
 }})});
 
-$('#user_table').on( 'order.dt', function () {
+$('#user_table').on( 'open.dt', function () {
 toastr.info('Users are being Processsed', 'Please Wait')
-} );
-
-$('.delete').on( 'click', function () {
-toastr.success('User Already Deleted', 'User Deleted')
-} );
-
-$('#user_table').on( 'create.dt', function () {
-toastr.success('User Created Succesfully', 'Success')
-} );
-
-$('#user_table').on( 'view.dt', function () {
-toastr.info('Viewing Clubs', 'About to view Clubs')
 } );
 
 } );

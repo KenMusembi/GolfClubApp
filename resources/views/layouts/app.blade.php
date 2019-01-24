@@ -22,8 +22,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<!--imported styles -->
+
+
+
+<!-- end -->
 </head>
-{!! Toastr::message('') !!}
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">

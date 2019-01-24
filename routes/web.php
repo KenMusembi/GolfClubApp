@@ -22,9 +22,9 @@ Route::get('welcome/fetchdata', 'UsersController@fetchdata')->name('welcome.fetc
 Route::get('welcome/removedata', 'UsersController@removedata')->name('welcome.removedata');
 Route::get('welcome/viewclubs', 'UsersController@viewclubs')->name('welcome.viewclubs');
 
-Route::get('/', function (UsersDataTable $dataTable  ) {
-    return $dataTable->render('index');
-});
+//Route::get('/', function (UsersDataTable $dataTable  ) {
+    //return $dataTable->render('index');
+//});
 
 Auth::routes();
 
@@ -35,7 +35,6 @@ Route::get('/home', function(){
 Route::resource('users', 'UsersController');
 Route::resource('clubs', 'ClubsController');
 
-Route::get('/', function () {
-  Toastr::success('Messages in here', 'Title', ["positionClass" => "toast-top-center"]);
+Route::get('/', function () {  
     return view('welcome');
 });

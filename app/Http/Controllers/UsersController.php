@@ -103,8 +103,6 @@ function index()
                 $user->password = $request->get('password');
                 $user->save();
                 $success_output = '<div class="alert alert-success">Data Updated</div>';
-            }
-
         }
 
         $output = array(
@@ -112,7 +110,7 @@ function index()
             'success'   =>  $success_output
         );
         echo json_encode($output);
-    }
+    }}
 
     function removedata(Request $request)
     {
