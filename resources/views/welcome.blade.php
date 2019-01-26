@@ -26,7 +26,10 @@
       <script src="https://cdn.datatables.net/buttons/1.5.0/js/buttons.bootstrap.min.js"></script>
 
       <script src="{{asset('js/editor.bootstrap.min.js')}}"></script>
-</head>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+       </head>
 <body>
 
 
@@ -117,25 +120,28 @@
                     <span id="form_output"></span>
                     <div class="form-group">
                         <label>Enroll User</label>
-                        <input type="integer" name="enroll_user_id" id="enroll_user_id" class="form-control" />
+                        <input type="hidden" name="enroll_user_id" id="enroll_user_id" class="form-control" />
                     </div>
+                    <button type="button" class="dropdown-item btn btn-info Mara" id="Mara" value="Mara" >Mara Club</button>
+                    <button type="button" class="dropdown-item btn btn-info Maasai" id="Maasai" value="Maasai" >Maasai Club</button>
+                    <button type="button" class="dropdown-item btn btn-info Mamba" id="Mamba" value="Mamba" >Mamba Club</button>
 
-                    <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle Mara" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Choose Club
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <button type="button" class="dropdown-item btn btn-secondary Mara" id="club_action" value="Mara" >Mara Club</button>
-    <button type="button" class="dropdown-item btn btn-secondary" id="club_action" value="Maasai" >Maasai Club</button>
-    <button type="button" class="dropdown-item btn btn-secondary" id="club_action" value="Mamba" >Mamba Club</button>
-  </div>
-</div>
+                    <form method="post" id="framework_form">
+    <div class="form-group">
+     <label>Select which Club You want to register this user in</label>
+     <select id="framework" name="framework[]" multiple class="form-control" >
+      <option id="Mara" value="Mara">Mara</option>
+      <option id="Maasai" value="CakePHP">Maasai</option>
+     </select>
+    </div>
+    <div class="form-group">
+     <input type="submit" class="btn btn-info" name="submit" value="Submit" />
+    </div>
+   </form>
+
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="user_id" id="user_id" value="" />
-                    <input type="hidden" name="club_action" id="club_action" value="" />
-                    <input type="submit" name="enrollsubmit" id="enrollsubmit" value="Enroll" class="btn btn-info" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
             </form>
         </div>
@@ -143,6 +149,38 @@
 </div>
 
 <script type="text/javascript">
+
+$(document).ready(function(){
+ $('#framework').multiselect({
+  nonSelectedText: 'Select Framework',
+  enableFiltering: true,
+  enableCaseInsensitiveFiltering: true,
+  buttonWidth:'400px'
+ });
+
+ $('#framework_form').on('submit', function(event){
+  event.preventDefault();
+  var form_data = $(this).serialize();
+  $.ajax({
+   url:'{{ url('enroll-user') }}/'+userId,
+   method:"POST",
+   data:form_data,
+   success:function(data)
+   {
+     $('#enroll').modal('show');
+    $('#framework option:selected').each(function(){
+     $(this).prop('selected', false);
+    });
+    $('#framework').multiselect('refresh');
+    alert(data);
+    console.log(data);
+   }
+  });
+ });
+
+
+});
+
 $(document).ready(function() {
      $('#user_table').DataTable({
         "processing": true,
@@ -291,8 +329,8 @@ $(document).on('click', '.enroll', function(){
              success:function(data)
              {
                $('#enroll_user_id').val(data.enroll_user_id);
-                     $('#enroll_club_id').val(data.enroll_club_id);
-                     $('#user_id').val(id);
+                //     $('#enroll_club_id').val(data.enroll_club_id);
+                //     $('#user_id').val(id);
                      $('#enroll').modal('show');
                      $('#action').val('Enroll');
                      $('.modal-title').text('Enroll');
@@ -301,29 +339,51 @@ $(document).on('click', '.enroll', function(){
 
     })  });
 
-//    $(document).on('click', '#Mara_Club', function(){
-//            alert('hey');
-//    })
 $(document).on('click', '.Mara', function(){
         var id = $(this).attr("id");
+        var userId = $('#enroll_user_id').val();
         $('#form_output').html('');
         $.ajax({
-            url:"{{route('welcome.enroll')}}",
+            url:'{{ url('enroll-user') }}/'+userId,
             method:'get',
             data:{id:id},
             dataType:'json',
             success:function(data)
-            {
-
-                $('#user_id').val(id);
-                $('#enroll').modal('show');
+            {   $('#enroll').modal('show');
                 $('#action').val('Mara');
-              //  $('.modal-title').text('Edit Data');
-                $('#club_action').val('Mara');
+                $('#Mara').val('Mara');
+            }})});
 
-            }
-        })
-    });
+            $(document).on('click', '.Maasai', function(){
+                      var id = $(this).attr("id");
+                      var userId = $('#enroll_user_id').val();
+                      $('#form_output').html('');
+                      $.ajax({
+                          url:'{{ url('enroll-user') }}/'+userId,
+                          method:'get',
+                          data:{id:id},
+                          dataType:'json',
+                          success:function(data)
+                          {   $('#enroll').modal('show');
+                              $('#action').val('Maasai');
+                              $('#Maasai').val('Maasai');
+                          }})});
+
+
+            $(document).on('click', '.Mamba', function(){
+                    var id = $(this).attr("id");
+                    var userId = $('#enroll_user_id').val();
+                    $('#form_output').html('');
+                    $.ajax({
+                        url:'{{ url('enroll-user') }}/'+userId,
+                        method:'get',
+                        data:{id:id},
+                        dataType:'json',
+                        success:function(data)
+                        {   $('#enroll').modal('show');
+                            $('#action').val('Mamba');
+                            $('#Mamba').val('Mamba');
+                        }})});
 
 
 

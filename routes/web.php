@@ -21,7 +21,7 @@ Route::post('welcome/postdata', 'UsersController@postdata')->name('welcome.postd
 Route::get('welcome/fetchdata', 'UsersController@fetchdata')->name('welcome.fetchdata');
 Route::get('welcome/removedata', 'UsersController@removedata')->name('welcome.removedata');
 Route::get('welcome/viewclubs', 'UsersController@viewclubs')->name('welcome.viewclubs');
-Route::get('welcome/enroll', 'UsersController@enroll')->name('welcome.enroll');
+Route::get('enroll-user/{userId}', 'UsersController@enroll')->name('enroll-user');
 Route::get('welcome/enrollData', 'UsersController@enrollData')->name('welcome.enrollData');
 
 

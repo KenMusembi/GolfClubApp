@@ -1,5 +1,5 @@
 <?php
-
+$usercluby;
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -142,45 +142,46 @@ function index()
 
    function enrollData(Request $request)
    {
-      $id = $request->input('id');
-     $usercluby = User::find($id);
+    global $userclubs;
+    $id = $request->input('id');
+     $userclubs = User::find($id);
         $output = array(
-          'enroll_user_id' => $usercluby->name,
+          'enroll_user_id' => $userclubs->id,
         );
         echo json_encode($output);
+
    }
 
 
-   function enroll(Request $request)
+   function enroll(Request $request, $userId)
    {
-       $error_array = array();
-       $success_output = '';
-           if($request->get('club_action') == 'Mara')
-           {
-             $user = new User([
-                 'name'    =>  'jojo',
-                 'email'     =>  'mail@gmaol.com',
-                 'password'  => 'Teranovas21'
-             ]);
-               $user->save();
-             $success_output = '<div class="alert alert-success">Data Inserted</div>';
-               //<script>toastr.success('User Already Deleted', 'User Deleted')</script>
-           }
+if($request->get('id') == 'Mara')
+{
+    $userclub = new ClubsRegistration ([
+      'user_id'    => $userId,
+      'club_id'     =>  1
 
-           if($request->get('button_action') == 'update')
-           {
-               $user_club = ClubsRegistration::find($request->get('user_id'));
-               $user_club->user_id = $request->get('user_id');
-               $user_club->club_id = $request->get('club_id');
-               $user_club->save();
-               $success_output = '<div class="alert alert-success">Data Updated</div>';
-       }
+    ]);
+    $userclub->save();
+  } else if($request->get('id') == 'Mamba')
+  {
+      $userclub = new ClubsRegistration ([
+        'user_id'    => $userId,
+        'club_id'     =>  3
 
-       $output = array(
-           'error'     =>  $error_array,
-           'success'   =>  $success_output
-       );
-       echo json_encode($output);
-   }
+      ]);
+      $userclub->save();
+    } else if($request->get('id') == 'Maasai')
+    {
+        $userclub = new ClubsRegistration ([
+          'user_id'    => $userId,
+          'club_id'     =>  2
 
+        ]);
+        $userclub->save();
+      }else {
+      return 'not ok';
+    }
+
+}
 }
