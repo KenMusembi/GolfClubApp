@@ -14,7 +14,7 @@ class CreateClubsTable extends Migration
     public function up()
     {
         Schema::create('clubs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
             $table->string('club_name');
             $table->string('description');
             $table->timestamps();

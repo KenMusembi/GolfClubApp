@@ -15,8 +15,11 @@ class CreateClubsRegistrationsTable extends Migration
     {
         Schema::create('clubs_registrations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('club_id');
+            $table->integer('user_id')->unsigned();
+          //  $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('club_id')->unsigned();
+            $table->foreign('club_id')->references('id')->on('clubs');
             $table->timestamps();
         });
     }
@@ -29,5 +32,8 @@ class CreateClubsRegistrationsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('clubs_registrations');
+        Schema::disableForeignKeyConstraints();
+    //Schema::drop('');
+    Schema::enableForeignKeyConstraints();
     }
 }

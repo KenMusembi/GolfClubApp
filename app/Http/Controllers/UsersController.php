@@ -44,7 +44,7 @@ function index()
      return Datatables::of($users)
      ->addColumn('action', function ($user)
     {
-        return '<a href="#" class="btn btn-xs btn-primary edit" id="'.$user->id.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+        return '<a href="#" class="btn btn-xs btn-primary edit" id="'.$user->id.'"><i class="glyphicon glyphicon-edit"></i> Update</a>
         <a href="#" class="btn btn-xs btn-danger delete" id="'.$user->id.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>
        <a href="#" class="btn btn-xs btn-success view" id="'.$user->id.'"><i class="glyphicon glyphicon-user"></i> ViewClub</a>
        <a href="#" class="btn btn-xs btn-warning enroll" id="'.$user->id.'"><i class="glyphicon glyphicon-plus"></i> Enroll</a>
@@ -92,7 +92,7 @@ function index()
                     'password'  => $request->get('password')
                 ]);
                 $user->save();
-              $success_output = '<div class="alert alert-success">Data Inserted</div>';
+            //  $success_output = '<div class="alert alert-success">Data Inserted</div>';
                 //<script>toastr.success('User Already Deleted', 'User Deleted')</script>
             }
 
@@ -103,7 +103,7 @@ function index()
                 $user->email = $request->get('email');
                 $user->password = $request->get('password');
                 $user->save();
-                $success_output = '<div class="alert alert-success">Data Updated</div>';
+            //    $success_output = '<div class="alert alert-success">Data Updated</div>';
         }
 
         $output = array(
@@ -132,8 +132,9 @@ function index()
          ->where('users.id', $id)
          //->pluck('club_name')
          //->groupby('users.id')
-        ->select(DB::raw("name, GROUP_CONCAT(club_name SEPARATOR ',') as clubs"))
+        ->select(DB::raw("GROUP_CONCAT(club_name SEPARATOR ' , ') as clubs"))
          ->groupby('users.id')
+         ->distinct()
          ->get();
 
          return response()->json(['data' => $userclubs]);
@@ -179,7 +180,63 @@ if($request->get('id') == 'Mara')
 
         ]);
         $userclub->save();
-      }else {
+      }else if($request->get('id') == 'Samburu')
+      {
+          $userclub = new ClubsRegistration ([
+            'user_id'    => $userId,
+            'club_id'     =>  4
+
+          ]);
+          $userclub->save();
+        }else if($request->get('id') == 'Olive')
+        {
+            $userclub = new ClubsRegistration ([
+              'user_id'    => $userId,
+              'club_id'     =>  5
+
+            ]);
+            $userclub->save();
+          }else if($request->get('id') == 'Razors')
+          {
+              $userclub = new ClubsRegistration ([
+                'user_id'    => $userId,
+                'club_id'     =>  6
+
+              ]);
+              $userclub->save();
+            }else if($request->get('id') == 'Warriors')
+            {
+                $userclub = new ClubsRegistration ([
+                  'user_id'    => $userId,
+                  'club_id'     =>  7
+
+                ]);
+                $userclub->save();
+              }else if($request->get('id') == 'Golag')
+              {
+                  $userclub = new ClubsRegistration ([
+                    'user_id'    => $userId,
+                    'club_id'     =>  8
+
+                  ]);
+                  $userclub->save();
+                }else if($request->get('id') == 'Archipelo')
+                {
+                    $userclub = new ClubsRegistration ([
+                      'user_id'    => $userId,
+                      'club_id'     =>  9
+
+                    ]);
+                    $userclub->save();
+                  }else if($request->get('id') == 'Buffalo')
+                  {
+                      $userclub = new ClubsRegistration ([
+                        'user_id'    => $userId,
+                        'club_id'     =>  10
+
+                      ]);
+                      $userclub->save();
+                    }else {
       return 'not ok';
     }
 

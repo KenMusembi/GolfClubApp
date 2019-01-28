@@ -14,7 +14,8 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
+          //  $table->foreign('id')->references('user_id')->on('clubs_registrations')->onDelete('cascade');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -32,5 +33,6 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
+
     }
 }

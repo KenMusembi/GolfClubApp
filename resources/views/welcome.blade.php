@@ -8,8 +8,6 @@
       <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
       <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.0/css/buttons.bootstrap.min.css">
       <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.4/css/select.bootstrap.min.css">
-      <link rel="stylesheet" href="css/editor.dataTables.css">
-      <link rel="stylesheet" href="css/editor.bootstrap.css">
 
       <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
       <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
@@ -20,21 +18,17 @@
       <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
       <script src="https://cdn.datatables.net/buttons/1.5.0/js/dataTables.buttons.min.js"></script>
       <script src="https://cdn.datatables.net/select/1.2.4/js/dataTables.select.min.js"></script>
-      <script src="{{asset('js/dataTables.editor.js')}}"></script>
 
       <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
       <script src="https://cdn.datatables.net/buttons/1.5.0/js/buttons.bootstrap.min.js"></script>
-
-      <script src="{{asset('js/editor.bootstrap.min.js')}}"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
        </head>
 <body>
 
-
 <div class="container">
-    <h3 align="center">Golf Club App</h3>
+    <h4 align="center">Golf Club App</h4>
     <div align="right">
         <button type="button" name="add" id="add_data" class="btn btn-success btn-sm">Add</button>
     </div>
@@ -114,6 +108,7 @@
                 <div class="modal-header">
                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                    <h4 class="modal-title">Enroll To Club</h4>
+                   <p>Once you click a checkbox, the user will be enrolled to that Club.</p>
                 </div>
                 <div class="modal-body">
                     {{csrf_field()}}
@@ -122,26 +117,23 @@
                         <label>Enroll User</label>
                         <input type="hidden" name="enroll_user_id" id="enroll_user_id" class="form-control" />
                     </div>
-                    <button type="button" class="dropdown-item btn btn-info Mara" id="Mara" value="Mara" >Mara Club</button>
+  <!--                  <button type="button" class="dropdown-item btn btn-info Mara" id="Mara" value="Mara" >Mara Club</button>
                     <button type="button" class="dropdown-item btn btn-info Maasai" id="Maasai" value="Maasai" >Maasai Club</button>
-                    <button type="button" class="dropdown-item btn btn-info Mamba" id="Mamba" value="Mamba" >Mamba Club</button>
-
-                    <form method="post" id="framework_form">
-    <div class="form-group">
-     <label>Select which Club You want to register this user in</label>
-     <select id="framework" name="framework[]" multiple class="form-control" >
-      <option id="Mara" value="Mara">Mara</option>
-      <option id="Maasai" value="CakePHP">Maasai</option>
-     </select>
-    </div>
-    <div class="form-group">
-     <input type="submit" class="btn btn-info" name="submit" value="Submit" />
-    </div>
-   </form>
-
+                    <button type="button" class="dropdown-item btn btn-info Mamba" id="Mamba" value="Mamba" >Mamba Club</button> -->
+<br>
+<input type="checkbox" name="feature1" class="Mara"  id="Mara" value="Mara" checked=''><label>Mara</label><br>
+<input type="checkbox" name="feature1" class="Maasai"  id="Maasai" value="Maasai" ><label>Maasai</label><br>
+<input type="checkbox" name="feature1" class="Mamba"  id="Mamba" value="Mamba" ><label>Mamba</label><br>
+<input type="checkbox" name="feature1" class="Samburu"  id="Samburu" value="Samburu" ><label>Samburu</label><br>
+<input type="checkbox" name="feature1" class="Olive"  id="Olive" value="Olive" ><label>Olive</label><br>
+<input type="checkbox" name="feature1" class="Razors"  id="Razors" value="Razors" ><label>Razors</label><br>
+<input type="checkbox" name="feature1" class="Warriors"  id="Warriors" value="Warriors" ><label>Warriors</label><br>
+<input type="checkbox" name="feature1" class="Golag"  id="Golag" value="Golag" ><label>Golag</label><br>
+<input type="checkbox" name="feature1" class="Archipelo"  id="Archipelo" value="Mara" ><label>Archipelo</label><br>
+<input type="checkbox" name="feature1" class="Buffalo"  id="Buffalo" value="Buffalo" ><label>Buffalo</label><br>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="close_button" data-dismiss="modal">Close</button>
                 </div>
             </form>
         </div>
@@ -149,38 +141,6 @@
 </div>
 
 <script type="text/javascript">
-
-$(document).ready(function(){
- $('#framework').multiselect({
-  nonSelectedText: 'Select Framework',
-  enableFiltering: true,
-  enableCaseInsensitiveFiltering: true,
-  buttonWidth:'400px'
- });
-
- $('#framework_form').on('submit', function(event){
-  event.preventDefault();
-  var form_data = $(this).serialize();
-  $.ajax({
-   url:'{{ url('enroll-user') }}/'+userId,
-   method:"POST",
-   data:form_data,
-   success:function(data)
-   {
-     $('#enroll').modal('show');
-    $('#framework option:selected').each(function(){
-     $(this).prop('selected', false);
-    });
-    $('#framework').multiselect('refresh');
-    alert(data);
-    console.log(data);
-   }
-  });
- });
-
-
-});
-
 $(document).ready(function() {
      $('#user_table').DataTable({
         "processing": true,
@@ -247,48 +207,58 @@ $(document).ready(function() {
                 dataType:'json',
                 success:function(data)
                 {
-                  toastr.warning('About to Edit User, changes will be permanent', 'User Edit')
                     $('#name').val(data.name);
                     $('#email').val(data.email);
                     $('#user_id').val(id);
                     $('#userModal').modal('show');
-                    $('#action').val('Edit');
-                    $('.modal-title').text('Edit Data');
+                    $('#action').val('Update');
+                    $('.modal-title').text('Update Data');
                     $('#button_action').val('update');
-
                 }
             })
         });
 
-        $(document).on('click', '.delete', function(){
+        $(document).on('click', '.delete', function(e){
             var id = $(this).attr('id');
-            if(confirm("Are you sure you want to Delete this data?"))
-            {
-                $.ajax({
-                    url:"{{route('welcome.removedata')}}",
-                    method:"get",
-                    data:{id:id},
-                    success:function(data)
-                    {
-toastr.success('User Already Deleted', 'User Deleted')
-                    //  alert(data);
-                      $('#user_table').DataTable().ajax.reload();
+            var form = this;
 
-                    }
-                })
-            }
-            else
-            {
-                return false;
-            }
-        });
-/*        $('#user_table').on('click', '.view', function () {
-          var id = $(this).attr('id');
-          $.get("{{ URL::to('welcome/viewclubs') }}", function(data){
-            console.log(data);
+     e.preventDefault();
+
+     swal({
+       title: "Are you sure?",
+       text: "You will not be able to recover this imaginary file!",
+       icon: "warning",
+       buttons: [
+         'No, cancel it!',
+         'Yes, I am sure!'
+       ],
+       dangerMode: true,
+     }).then(function(isConfirm) {
+       if (isConfirm) {
+         swal({
+           title: 'Deleted!',
+           text: 'User is successfully deleted!',
+           icon: 'success'
+         }).then(function() {
+          //
+          $.ajax({
+              url:"{{route('welcome.removedata')}}",
+              method:"get",
+              data:{id:id},
+              success:function(data)
+              {
+//toastr.success('User Already Deleted', 'User Deleted')
+              //  alert(data);
+                $('#user_table').DataTable().ajax.reload();
+              }
           })
-      });
-      */
+         });
+       } else {
+         swal("Cancelled", "The user has not been deleted :)", "error");
+       }
+     });
+});
+
       $(document).on('click', '.view', function(){
               var id = $(this).attr("id");
               $.ajax({
@@ -298,19 +268,14 @@ toastr.success('User Already Deleted', 'User Deleted')
                   dataType:'json',
                   success:function(data)
                   {
-                    console.log(data),
-toastr.success('Viewing User Clubs', 'Succesfull!')
                 $('#user_name').val(data.user_name);
                 $('#club_name').val(data.club_name);
                 $('#action').val("view");
                 $('#view').modal('show');
                 $('.modal-title').text('View Clubs');
                 $('#button_action').val('view');
-              //  var data = $(this).serializeObject();
-   //json_data = JSON.stringify(data);
-  // obj= JSON.parse(json_data);
-   //document.getElementById("view").innerHTML = json_data.club_name;
-$(".modal-body").text(data.data[0].clubs);
+                $("#view").find('.modal-body').text(data.data[0].clubs);
+//$(".modal-body").text(data.data[0].clubs);
 }})});
 
 $('#user_table').on( 'open.dt', function () {
@@ -319,8 +284,19 @@ toastr.info('Users are being Processsed', 'Please Wait')
 
 //addint script for enroll
 $(document).on('click', '.enroll', function(){
+$('.Mara').prop('checked', false);
+$('.Maasai').prop('checked', false);
+$('.Mamba').prop('checked', false);
+$('.Samburu').prop('checked', false);
+$('.Olive').prop('checked', false);
+$('.Razors').prop('checked', false);
+$('.Warriors').prop('checked', false);
+$('.Golag').prop('checked', false);
+$('.Archipelo').prop('checked', false);
+$('.Buffalo').prop('checked', false);
+
   var id = $(this).attr("id");
-         $('#form_output').html('');
+        // $('#form_output').html('');
          $.ajax({
              url:"{{route('welcome.enrollData')}}",
              method:'get',
@@ -333,58 +309,173 @@ $(document).on('click', '.enroll', function(){
                 //     $('#user_id').val(id);
                      $('#enroll').modal('show');
                      $('#action').val('Enroll');
-                     $('.modal-title').text('Enroll');
+                     $('.modal-title').text('Enroll User');
                      //add method for taking in the club
       }
-
     })  });
 
 $(document).on('click', '.Mara', function(){
+        //$('.Mara').prop('checked', false);
+        toastr.info('User Added to Club', 'User Addition Succesfull');
         var id = $(this).attr("id");
         var userId = $('#enroll_user_id').val();
-        $('#form_output').html('');
+      //  $('#form_output').html('');
         $.ajax({
             url:'{{ url('enroll-user') }}/'+userId,
             method:'get',
             data:{id:id},
             dataType:'json',
             success:function(data)
-            {   $('#enroll').modal('show');
+            {
+              $('#enroll').modal('show');
                 $('#action').val('Mara');
                 $('#Mara').val('Mara');
             }})});
 
-            $(document).on('click', '.Maasai', function(){
-                      var id = $(this).attr("id");
-                      var userId = $('#enroll_user_id').val();
-                      $('#form_output').html('');
-                      $.ajax({
-                          url:'{{ url('enroll-user') }}/'+userId,
-                          method:'get',
-                          data:{id:id},
-                          dataType:'json',
-                          success:function(data)
-                          {   $('#enroll').modal('show');
-                              $('#action').val('Maasai');
-                              $('#Maasai').val('Maasai');
-                          }})});
+      $(document).on('click', '.Maasai', function(){
+        toastr.info('User Added to Maasai Club', 'User Addition Succesfull');
+        var id = $(this).attr("id");
+        var userId = $('#enroll_user_id').val();
+        //    $('#form_output').html('');
+        $.ajax({
+          url:'{{ url('enroll-user') }}/'+userId,
+          method:'get',
+          data:{id:id},
+          dataType:'json',
+          success:function(data)
+          {   $('#enroll').modal('show');
+          $('#action').val('Maasai');
+          $('#Maasai').val('Maasai');
+        }})});
 
 
-            $(document).on('click', '.Mamba', function(){
+        $(document).on('click', '.Mamba', function(){
+          toastr.info('User Added to Mamba Club', 'User Addition Succesfull');
+          var id = $(this).attr("id");
+          var userId = $('#enroll_user_id').val();
+          //    $('#form_output').html('');
+          $.ajax({
+            url:'{{ url('enroll-user') }}/'+userId,
+            method:'get',
+            data:{id:id},
+            dataType:'json',
+            success:function(data)
+            {   $('#enroll').modal('show');
+            $('#action').val('Mamba');
+            $('#Mamba').val('Mamba');
+          }})});
+
+          $(document).on('click', '.Samburu', function(){
+            toastr.info('User Added to Samburu Club', 'User Addition Succesfull');
+            var id = $(this).attr("id");
+            var userId = $('#enroll_user_id').val();
+            $('#form_output').html('');
+            $.ajax({
+              url:'{{ url('enroll-user') }}/'+userId,
+              method:'get',
+              data:{id:id},
+              dataType:'json',
+              success:function(data)
+              {   $('#enroll').modal('show');
+              $('#action').val('Samburu');
+              $('#Samburu').val('Samburu');
+            }})});
+
+            $(document).on('click', '.Olive', function(){
+              toastr.info('User Added to Olive Club', 'User Addition Succesfull');
+              var id = $(this).attr("id");
+              var userId = $('#enroll_user_id').val();
+              $('#form_output').html('');
+              $.ajax({
+                url:'{{ url('enroll-user') }}/'+userId,
+                method:'get',
+                data:{id:id},
+                dataType:'json',
+                success:function(data)
+                {   $('#enroll').modal('show');
+                $('#action').val('Olive');
+                $('#Olive').val('Olive');
+              }})});
+
+              $(document).on('click', '.Razors', function(){
+                toastr.info('User Added to Razors Club', 'User Addition Succesfull');
+                var id = $(this).attr("id");
+                var userId = $('#enroll_user_id').val();
+                $('#form_output').html('');
+                $.ajax({
+                  url:'{{ url('enroll-user') }}/'+userId,
+                  method:'get',
+                  data:{id:id},
+                  dataType:'json',
+                  success:function(data)
+                  {   $('#enroll').modal('show');
+                  $('#action').val('Razors');
+                  $('#Razors').val('Razors');
+                }})});
+
+                $(document).on('click', '.Warriors', function(){
+                  toastr.info('User Added to Warriors Club', 'User Addition Succesfull');
+                  var id = $(this).attr("id");
+                  var userId = $('#enroll_user_id').val();
+                  $('#form_output').html('');
+                  $.ajax({
+                    url:'{{ url('enroll-user') }}/'+userId,
+                    method:'get',
+                    data:{id:id},
+                    dataType:'json',
+                    success:function(data)
+                    {   $('#enroll').modal('show');
+                    $('#action').val('Warriors');
+                    $('#Warriors').val('Warriors');
+                  }})});
+
+                  $(document).on('click', '.Golag', function(){
+                    toastr.info('User Added to Golag Club', 'User Addition Succesfull');
                     var id = $(this).attr("id");
                     var userId = $('#enroll_user_id').val();
                     $('#form_output').html('');
                     $.ajax({
+                      url:'{{ url('enroll-user') }}/'+userId,
+                      method:'get',
+                      data:{id:id},
+                      dataType:'json',
+                      success:function(data)
+                      {   $('#enroll').modal('show');
+                      $('#action').val('Golag');
+                      $('#Golag').val('Golag');
+                    }})});
+
+                    $(document).on('click', '.Archipelo', function(){
+                      toastr.info('User Added to Archipelo Club', 'User Addition Succesfull');
+                      var id = $(this).attr("id");
+                      var userId = $('#enroll_user_id').val();
+                      $('#form_output').html('');
+                      $.ajax({
                         url:'{{ url('enroll-user') }}/'+userId,
                         method:'get',
                         data:{id:id},
                         dataType:'json',
                         success:function(data)
                         {   $('#enroll').modal('show');
-                            $('#action').val('Mamba');
-                            $('#Mamba').val('Mamba');
-                        }})});
+                        $('#action').val('Archipelo');
+                        $('#Archipelo').val('Archipelo');
+                      }})});
 
+                      $(document).on('click', '.Buffalo', function(){
+                        toastr.info('User Added to Buffalo Club', 'User Addition Succesfull');
+                        var id = $(this).attr("id");
+                        var userId = $('#enroll_user_id').val();
+                        $('#form_output').html('');
+                        $.ajax({
+                          url:'{{ url('enroll-user') }}/'+userId,
+                          method:'get',
+                          data:{id:id},
+                          dataType:'json',
+                          success:function(data)
+                          {   $('#enroll').modal('show');
+                          $('#action').val('Buffalo');
+                          $('#Buffalo').val('Buffalo');
+                        }})});
 
 
 } );
