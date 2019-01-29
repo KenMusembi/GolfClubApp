@@ -120,17 +120,23 @@
   <!--                  <button type="button" class="dropdown-item btn btn-info Mara" id="Mara" value="Mara" >Mara Club</button>
                     <button type="button" class="dropdown-item btn btn-info Maasai" id="Maasai" value="Maasai" >Maasai Club</button>
                     <button type="button" class="dropdown-item btn btn-info Mamba" id="Mamba" value="Mamba" >Mamba Club</button> -->
-<br>
+<br><?php
+$connect = new PDO("mysql:host=localhost;dbname=golfclub2", "root", "");
+$query = "SELECT * FROM clubs_registrations WHERE user_id = 'enroll_user_id & club_id = 1 ";
+$statement = $connect->prepare($query);
+if($statement->execute())
+{
+ while($row = $statement->fetch(PDO::FETCH_ASSOC))
+ {
+  $data[] = $row;
+ }
+
+ echo json_encode($data);
+}?>
 <input type="checkbox" name="feature1" class="Mara"  id="Mara" value="Mara" checked=''><label>Mara</label><br>
-<input type="checkbox" name="feature1" class="Maasai"  id="Maasai" value="Maasai" ><label>Maasai</label><br>
-<input type="checkbox" name="feature1" class="Mamba"  id="Mamba" value="Mamba" ><label>Mamba</label><br>
-<input type="checkbox" name="feature1" class="Samburu"  id="Samburu" value="Samburu" ><label>Samburu</label><br>
-<input type="checkbox" name="feature1" class="Olive"  id="Olive" value="Olive" ><label>Olive</label><br>
-<input type="checkbox" name="feature1" class="Razors"  id="Razors" value="Razors" ><label>Razors</label><br>
-<input type="checkbox" name="feature1" class="Warriors"  id="Warriors" value="Warriors" ><label>Warriors</label><br>
-<input type="checkbox" name="feature1" class="Golag"  id="Golag" value="Golag" ><label>Golag</label><br>
-<input type="checkbox" name="feature1" class="Archipelo"  id="Archipelo" value="Mara" ><label>Archipelo</label><br>
-<input type="checkbox" name="feature1" class="Buffalo"  id="Buffalo" value="Buffalo" ><label>Buffalo</label><br>
+
+
+<!-- <input type="checkbox" name="feature1" class="Mara"  id="Mara" value="Mara" checked=''><label>Mara</label><br> -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="close_button" data-dismiss="modal">Close</button>
@@ -284,7 +290,7 @@ toastr.info('Users are being Processsed', 'Please Wait')
 
 //addint script for enroll
 $(document).on('click', '.enroll', function(){
-$('.Mara').prop('checked', false);
+/*$('.Mara').prop('checked', false);
 $('.Maasai').prop('checked', false);
 $('.Mamba').prop('checked', false);
 $('.Samburu').prop('checked', false);
@@ -294,7 +300,7 @@ $('.Warriors').prop('checked', false);
 $('.Golag').prop('checked', false);
 $('.Archipelo').prop('checked', false);
 $('.Buffalo').prop('checked', false);
-
+*/
   var id = $(this).attr("id");
         // $('#form_output').html('');
          $.ajax({
@@ -316,7 +322,7 @@ $('.Buffalo').prop('checked', false);
 
 $(document).on('click', '.Mara', function(){
         //$('.Mara').prop('checked', false);
-        toastr.info('User Added to Club', 'User Addition Succesfull');
+toastr.info('User Added to Mara Club', 'User Addition Succesfull');
         var id = $(this).attr("id");
         var userId = $('#enroll_user_id').val();
       //  $('#form_output').html('');
