@@ -116,25 +116,22 @@
                     <div class="form-group">
                         <label>Enroll User</label>
                         <input type="hidden" name="enroll_user_id" id="enroll_user_id" class="form-control" />
+                        <input type="hidden" name="enroll_club_id" id="enroll_club_id" class="form-control" />
                     </div>
   <!--                  <button type="button" class="dropdown-item btn btn-info Mara" id="Mara" value="Mara" >Mara Club</button>
                     <button type="button" class="dropdown-item btn btn-info Maasai" id="Maasai" value="Maasai" >Maasai Club</button>
                     <button type="button" class="dropdown-item btn btn-info Mamba" id="Mamba" value="Mamba" >Mamba Club</button> -->
-<br><?php
-$connect = new PDO("mysql:host=localhost;dbname=golfclub2", "root", "");
-$query = "SELECT * FROM clubs_registrations WHERE user_id = 'enroll_user_id & club_id = 1 ";
-$statement = $connect->prepare($query);
-if($statement->execute())
-{
- while($row = $statement->fetch(PDO::FETCH_ASSOC))
- {
-  $data[] = $row;
- }
-
- echo json_encode($data);
-}?>
-<input type="checkbox" name="feature1" class="Mara"  id="Mara" value="Mara" checked=''><label>Mara</label><br>
-
+<br>
+<input type="checkbox" name="feature1" class="Mara"  id="Mara" value="Mara"><label>Mara</label><br>
+<input type="checkbox" name="feature2" class="Maasai"  id="Maasai" value="Maasai"><label>Maasai</label><br>
+<input type="checkbox" name="feature3" class="Mamba"  id="Mamba" value="Mamba"><label>Mamba</label><br>
+<input type="checkbox" name="feature4" class="Samburu"  id="Samburu" value="Samburu"><label>Samburu</label><br>
+<input type="checkbox" name="feature5" class="Olive"  id="Olive" value="Olive"><label>Olive</label><br>
+<input type="checkbox" name="feature6" class="Razors"  id="Razors" value="Razors"><label>Razors</label><br>
+<input type="checkbox" name="feature7" class="Warriors"  id="Warriors" value="Warriors"><label>Warriors</label><br>
+<input type="checkbox" name="feature8" class="Golag"  id="Golag" value="Golag"><label>Golag</label><br>
+<input type="checkbox" name="feature9" class="Archipelo"  id="Archipelo" value="Archipelo"><label>Archipelo</label><br>
+<input type="checkbox" name="feature10" class="Buffalo"  id="Buffalo" value="Buffalo"><label>Buffalo</label><br>
 
 <!-- <input type="checkbox" name="feature1" class="Mara"  id="Mara" value="Mara" checked=''><label>Mara</label><br> -->
                 </div>
@@ -160,7 +157,6 @@ $(document).ready(function() {
         ],
         "order": [[1, 'asc']]
      });
-
     $('#add_data').click(function(){
         $('#userModal').modal('show');
         $('#user_form')[0].reset();
@@ -168,7 +164,6 @@ $(document).ready(function() {
         $('#button_action').val('insert');
         $('#action').val('Add');
     });
-
     $('#user_form').on('submit', function(event){
         event.preventDefault();
         var form_data = $(this).serialize();
@@ -185,7 +180,6 @@ $(document).ready(function() {
                     for(var count = 0; count < data.error.length; count++)
                     {
                         error_html += '<div class="alert alert-danger">'+data.error[count]+'</div>';
-
                     }
                     $('#form_output').html(error_html);
                 }
@@ -202,7 +196,6 @@ $(document).ready(function() {
             }
         })
     });
-
     $(document).on('click', '.edit', function(){
             var id = $(this).attr("id");
             $('#form_output').html('');
@@ -223,13 +216,10 @@ $(document).ready(function() {
                 }
             })
         });
-
         $(document).on('click', '.delete', function(e){
             var id = $(this).attr('id');
             var form = this;
-
      e.preventDefault();
-
      swal({
        title: "Are you sure?",
        text: "You will not be able to recover this imaginary file!",
@@ -264,7 +254,6 @@ $(document).ready(function() {
        }
      });
 });
-
       $(document).on('click', '.view', function(){
               var id = $(this).attr("id");
               $.ajax({
@@ -283,24 +272,13 @@ $(document).ready(function() {
                 $("#view").find('.modal-body').text(data.data[0].clubs);
 //$(".modal-body").text(data.data[0].clubs);
 }})});
-
 $('#user_table').on( 'open.dt', function () {
 toastr.info('Users are being Processsed', 'Please Wait')
 } );
-
 //addint script for enroll
 $(document).on('click', '.enroll', function(){
-/*$('.Mara').prop('checked', false);
-$('.Maasai').prop('checked', false);
-$('.Mamba').prop('checked', false);
-$('.Samburu').prop('checked', false);
-$('.Olive').prop('checked', false);
-$('.Razors').prop('checked', false);
-$('.Warriors').prop('checked', false);
-$('.Golag').prop('checked', false);
-$('.Archipelo').prop('checked', false);
-$('.Buffalo').prop('checked', false);
-*/
+$('input:checkbox').removeAttr('checked');
+$('input:checkbox').prop('checked', false);
   var id = $(this).attr("id");
         // $('#form_output').html('');
          $.ajax({
@@ -310,16 +288,53 @@ $('.Buffalo').prop('checked', false);
              dataType:'json',
              success:function(data)
              {
+
                $('#enroll_user_id').val(data.enroll_user_id);
-                //     $('#enroll_club_id').val(data.enroll_club_id);
+               $('#enroll_club_id').val(data.enroll_club_id);
                 //     $('#user_id').val(id);
                      $('#enroll').modal('show');
                      $('#action').val('Enroll');
                      $('.modal-title').text('Enroll User');
+                     $('#user_table').DataTable().ajax.reload();
+                     //console.log(data.enroll_club_id);
+
+                     if(data.enroll_club_id.includes(1)===true){
+                       $('.Mara').prop('checked', true);
+                     }
+                      if (data.enroll_club_id.includes(2)===true){
+                       $('.Maasai').prop('checked', true);
+                     }
+                     if(data.enroll_club_id.includes(3)===true){
+                       $('.Mamba').prop('checked', true);
+                     }
+                     if(data.enroll_club_id.includes(4)===true){
+                       $('.Samburu').prop('checked', true);
+                     }
+                     if(data.enroll_club_id.includes(5)===true){
+                       $('.Olive').prop('checked', true);
+                     }
+                     if(data.enroll_club_id.includes(6)===true){
+                       $('.Razors').prop('checked', true);
+                     }
+                     if(data.enroll_club_id.includes(7)===true){
+                       $('.Warriors').prop('checked', true);
+                     }
+                     if(data.enroll_club_id.includes(8)===true){
+                         $('.Golag').prop('checked', true);
+                     }
+                     if(data.enroll_club_id.includes(9)===true){
+                       $('.Archipelo').prop('checked', true);
+                     }
+                     if (data.enroll_club_id.includes(10)===true){
+                       $('.Buffalo').prop('checked', true);
+                     }
+                           $('#modal').on('hidden', function() {
+                               $(this).data('modal').$element.removeData();
+                           })
+
                      //add method for taking in the club
       }
     })  });
-
 $(document).on('click', '.Mara', function(){
         //$('.Mara').prop('checked', false);
 toastr.info('User Added to Mara Club', 'User Addition Succesfull');
@@ -336,8 +351,8 @@ toastr.info('User Added to Mara Club', 'User Addition Succesfull');
               $('#enroll').modal('show');
                 $('#action').val('Mara');
                 $('#Mara').val('Mara');
-            }})});
 
+            }})});
       $(document).on('click', '.Maasai', function(){
         toastr.info('User Added to Maasai Club', 'User Addition Succesfull');
         var id = $(this).attr("id");
@@ -353,8 +368,6 @@ toastr.info('User Added to Mara Club', 'User Addition Succesfull');
           $('#action').val('Maasai');
           $('#Maasai').val('Maasai');
         }})});
-
-
         $(document).on('click', '.Mamba', function(){
           toastr.info('User Added to Mamba Club', 'User Addition Succesfull');
           var id = $(this).attr("id");
@@ -370,7 +383,6 @@ toastr.info('User Added to Mara Club', 'User Addition Succesfull');
             $('#action').val('Mamba');
             $('#Mamba').val('Mamba');
           }})});
-
           $(document).on('click', '.Samburu', function(){
             toastr.info('User Added to Samburu Club', 'User Addition Succesfull');
             var id = $(this).attr("id");
@@ -386,7 +398,6 @@ toastr.info('User Added to Mara Club', 'User Addition Succesfull');
               $('#action').val('Samburu');
               $('#Samburu').val('Samburu');
             }})});
-
             $(document).on('click', '.Olive', function(){
               toastr.info('User Added to Olive Club', 'User Addition Succesfull');
               var id = $(this).attr("id");
@@ -402,7 +413,6 @@ toastr.info('User Added to Mara Club', 'User Addition Succesfull');
                 $('#action').val('Olive');
                 $('#Olive').val('Olive');
               }})});
-
               $(document).on('click', '.Razors', function(){
                 toastr.info('User Added to Razors Club', 'User Addition Succesfull');
                 var id = $(this).attr("id");
@@ -418,7 +428,6 @@ toastr.info('User Added to Mara Club', 'User Addition Succesfull');
                   $('#action').val('Razors');
                   $('#Razors').val('Razors');
                 }})});
-
                 $(document).on('click', '.Warriors', function(){
                   toastr.info('User Added to Warriors Club', 'User Addition Succesfull');
                   var id = $(this).attr("id");
@@ -434,7 +443,6 @@ toastr.info('User Added to Mara Club', 'User Addition Succesfull');
                     $('#action').val('Warriors');
                     $('#Warriors').val('Warriors');
                   }})});
-
                   $(document).on('click', '.Golag', function(){
                     toastr.info('User Added to Golag Club', 'User Addition Succesfull');
                     var id = $(this).attr("id");
@@ -450,7 +458,6 @@ toastr.info('User Added to Mara Club', 'User Addition Succesfull');
                       $('#action').val('Golag');
                       $('#Golag').val('Golag');
                     }})});
-
                     $(document).on('click', '.Archipelo', function(){
                       toastr.info('User Added to Archipelo Club', 'User Addition Succesfull');
                       var id = $(this).attr("id");
@@ -466,7 +473,6 @@ toastr.info('User Added to Mara Club', 'User Addition Succesfull');
                         $('#action').val('Archipelo');
                         $('#Archipelo').val('Archipelo');
                       }})});
-
                       $(document).on('click', '.Buffalo', function(){
                         toastr.info('User Added to Buffalo Club', 'User Addition Succesfull');
                         var id = $(this).attr("id");
@@ -482,8 +488,6 @@ toastr.info('User Added to Mara Club', 'User Addition Succesfull');
                           $('#action').val('Buffalo');
                           $('#Buffalo').val('Buffalo');
                         }})});
-
-
 } );
     </script>
     </body>

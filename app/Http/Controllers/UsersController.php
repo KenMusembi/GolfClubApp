@@ -1,7 +1,6 @@
 <?php
 $usercluby;
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\DataTables\UsersDataTable;
 use App\DataTables\UsersDataTablesEditor;
@@ -13,32 +12,25 @@ use App\Clubs;
 use App\ClubsRegistration;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 class UsersController extends Controller
 {
     //
 /*public function index(UsersDataTable $dataTable)
   {
       return $dataTable->render('index');
-
 }
-
-
-
   public function store(UsersDataTablesEditor $editor)
   {
       return $editor->process(request());
   }
 */
 //custom fann_get_cascade_activation_functions
-
 function index()
     {
        $allRoles = ClubsRegistration::all();
      return view('welcome');
      //http://127.0.0:8000/ajaxdata
     }
-
     function getdata()
     {
      $users = User::select('users.id', 'users.name','users.email');
@@ -52,7 +44,6 @@ function index()
        ';
     })->make(true);
     }
-
     function fetchdata(Request $request)
         {
             $id = $request->input('id');
@@ -65,7 +56,6 @@ function index()
             );
             echo json_encode($output);
         }
-
     function postdata(Request $request)
     {
         $validation = Validator::make($request->all(), [
@@ -73,7 +63,6 @@ function index()
             'email'  => 'required',
             'password' => 'required',
         ]);
-
         $error_array = array();
         $success_output = '';
         if ($validation->fails())
@@ -96,7 +85,6 @@ function index()
             //  $success_output = '<div class="alert alert-success">Data Inserted</div>';
                 //<script>toastr.success('User Already Deleted', 'User Deleted')</script>
             }
-
             if($request->get('button_action') == 'update')
             {
                 $user = User::find($request->get('user_id'));
@@ -106,14 +94,12 @@ function index()
                 $user->save();
             //    $success_output = '<div class="alert alert-success">Data Updated</div>';
         }
-
         $output = array(
             'error'     =>  $error_array,
             'success'   =>  $success_output
         );
         echo json_encode($output);
     }}
-
     function removedata(Request $request)
     {
         $user = User::find($request->input('id'));
@@ -122,7 +108,6 @@ function index()
             echo 'Data Deleted';
         }
     }
-
     function viewclubs(Request $request)
     {
       $id = $request->input('id');
@@ -137,36 +122,38 @@ function index()
          ->groupby('users.id')
          ->distinct()
          ->get();
-
          return response()->json(['data' => $userclubs]);
         //return view('welcome/viewclubs');
    }
-
    function enrollData(Request $request)
    {
- $allRoles = ClubsRegistration::all();
-
     global $userclubs;
     $id = $request->input('id');
      $userclubs = User::find($id);
+     $clubsin = DB::table('clubs_registrations')
+     ->leftjoin('clubs','clubs.id','=','clubs_registrations.club_id')
+     ->leftjoin('users', 'users.id', '=','clubs_registrations.user_id')
+        ->where('users.id', $id)
+       ->select(DB::raw("GROUP_CONCAT(club_id SEPARATOR ' , ') as club_id"))
+      ->distinct()
+        ->get();
         $output = array(
           'enroll_user_id' => $userclubs->id,
-        );        
+          'enroll_club_id' => $clubsin->first()->club_id,
+        );
         echo json_encode($output);
 
    }
-
-
    function enroll(Request $request, $userId)
    {
 if($request->get('id') == 'Mara')
 {
-  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 1)->get();
-  if($checker != true){
+  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 1)->select('id')->count();
+  //var_dump($checker);
+  if($checker == 0){
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  1
-
     ]);
     $userclub->save();
   } else return "duplicate entry";
@@ -177,7 +164,6 @@ if($request->get('id') == 'Mara')
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  3
-
     ]);
     $userclub->save();
   } else return "duplicate entry";
@@ -188,7 +174,6 @@ if($request->get('id') == 'Mara')
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  2
-
     ]);
     $userclub->save();
   } else echo "<script> toastr.warning('User Added to Mara Club', 'User Addition Succesfull');</script>";
@@ -199,7 +184,6 @@ if($request->get('id') == 'Mara')
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  4
-
     ]);
     $userclub->save();
   } else return "duplicate entry";
@@ -210,7 +194,6 @@ if($request->get('id') == 'Mara')
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  5
-
     ]);
     $userclub->save();
   } else return "duplicate entry";
@@ -221,7 +204,6 @@ if($request->get('id') == 'Mara')
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  6
-
     ]);
     $userclub->save();
   } else return "duplicate entry";
@@ -232,7 +214,6 @@ if($request->get('id') == 'Mara')
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  7
-
     ]);
     $userclub->save();
   } else return "duplicate entry";
@@ -243,7 +224,6 @@ if($request->get('id') == 'Mara')
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  8
-
     ]);
     $userclub->save();
   } else return "duplicate entry";
@@ -254,7 +234,6 @@ if($request->get('id') == 'Mara')
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  9
-
     ]);
     $userclub->save();
   } else return "duplicate entry";
@@ -265,13 +244,11 @@ if($request->get('id') == 'Mara')
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  10
-
     ]);
     $userclub->save();
   } else return "duplicate entry";
 }else {
       return 'not ok';
     }
-
 }
 }
