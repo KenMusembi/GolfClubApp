@@ -118,13 +118,14 @@ function index()
          ->where('users.id', $id)
          //->pluck('club_name')
          //->groupby('users.id')
-        ->select(DB::raw("GROUP_CONCAT(club_name SEPARATOR ' , ') as clubs"))
+        ->select(DB::raw("GROUP_CONCAT( club_name SEPARATOR ' , ') as clubs"))
          ->groupby('users.id')
          ->distinct()
          ->get();
          return response()->json(['data' => $userclubs]);
         //return view('welcome/viewclubs');
    }
+
    function enrollData(Request $request)
    {
     global $userclubs;
@@ -142,112 +143,122 @@ function index()
           'enroll_club_id' => $clubsin->first()->club_id,
         );
         echo json_encode($output);
-
    }
+
    function enroll(Request $request, $userId)
    {
 if($request->get('id') == 'Mara')
 {
   $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 1)->select('id')->count();
-  //var_dump($checker);
+  var_dump($checker);
   if($checker == 0){
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  1
     ]);
     $userclub->save();
-  } else return "duplicate entry";
-}else if($request->get('id') == 'Mamba')
+  } else {
+  $checker2 = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 1)->select('id')->delete();
+}}else if($request->get('id') == 'Mamba')
 {
-  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 3)->get();
-  if($checker != true){
+  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 3)->select('id')->count();
+  if($checker == 0){
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  3
     ]);
     $userclub->save();
-  } else return "duplicate entry";
-} else if($request->get('id') == 'Maasai')
+  } else {
+  $checker2 = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 3)->select('id')->delete();
+}} else if($request->get('id') == 'Maasai')
 {
-  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 2)->get();
-  if($checker != true){
+  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 2)->select('id')->count();
+  if($checker == 0){
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  2
     ]);
     $userclub->save();
-  } else echo "<script> toastr.warning('User Added to Mara Club', 'User Addition Succesfull');</script>";
-}else if($request->get('id') == 'Samburu')
+  } else {
+  $checker2 = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 2)->select('id')->delete();
+}}else if($request->get('id') == 'Samburu')
 {
-  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 4)->get();
-  if($checker != true){
+  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 4)->select('id')->count();
+  if($checker == 0){
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  4
     ]);
     $userclub->save();
-  } else return "duplicate entry";
-}else if($request->get('id') == 'Olive')
+  } else {
+  $checker2 = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 4)->select('id')->delete();
+}}else if($request->get('id') == 'Olive')
 {
-  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 5)->get();
-  if($checker != true){
+  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 5)->select('id')->count();
+  if($checker == 0){
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  5
     ]);
     $userclub->save();
-  } else return "duplicate entry";
-}else if($request->get('id') == 'Razors')
+  }else {
+  $checker2 = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 5)->select('id')->delete();
+}}else if($request->get('id') == 'Razors')
 {
-  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 6)->get();
-  if($checker != true){
+  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 6)->select('id')->count();
+  if($checker == 0){
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  6
     ]);
     $userclub->save();
-  } else return "duplicate entry";
-}else if($request->get('id') == 'Warriors')
+  } else {
+  $checker2 = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 6)->select('id')->delete();
+}}else if($request->get('id') == 'Warriors')
 {
-  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 7)->get();
-  if($checker != true){
+  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 7)->select('id')->count();
+  if($checker == 0){
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  7
     ]);
     $userclub->save();
-  } else return "duplicate entry";
-}else if($request->get('id') == 'Golag')
+  } else {
+  $checker2 = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 7)->select('id')->delete();
+}}else if($request->get('id') == 'Golag')
 {
-  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 8)->get();
-  if($checker != true){
+  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 8)->select('id')->count();
+  if($checker == 0){
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  8
     ]);
     $userclub->save();
-  } else return "duplicate entry";
-}else if($request->get('id') == 'Archipelo')
+  }else {
+  $checker2 = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 8)->select('id')->delete();
+}}else if($request->get('id') == 'Archipelo')
 {
-  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 9)->get();
-  if($checker != true){
+  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 9)->select('id')->count();
+  if($checker == 0){
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  9
     ]);
     $userclub->save();
-  } else return "duplicate entry";
-}else if($request->get('id') == 'Buffalo')
+  } else {
+  $checker2 = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 9)->select('id')->delete();
+}}else if($request->get('id') == 'Buffalo')
 {
-  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 10)->get();
-  if($checker != true){
+  $checker = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 10)->select('id')->count();
+  if($checker == 0){
     $userclub = new ClubsRegistration ([
       'user_id'    => $userId,
       'club_id'     =>  10
     ]);
     $userclub->save();
-  } else return "duplicate entry";
-}else {
+  } else {
+  $checker2 = DB::table('clubs_registrations')->where('user_id', $userId)->where('club_id', 10)->select('id')->delete();
+}}else {
       return 'not ok';
     }
 }
