@@ -4,7 +4,11 @@ namespace App\DataTables;
 
 use App\Clubs;
 use Yajra\DataTables\Services\DataTable;
-
+App\User;
+use App\Clubs;
+use App\ClubsRegistration;
+use Yajra\Datatables\Datatables;
+use Yajra\DataTables\Services\DataTable;
 class ClubsDataTable extends DataTable
 {
     /**

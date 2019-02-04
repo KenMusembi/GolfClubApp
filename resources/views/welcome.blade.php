@@ -40,7 +40,7 @@
       <th>#</th>
       <th>Name</th>
       <th>Email</th>
-      <th style="width:275px" style="align:center">Action</th>
+      <th style="width:280px" style="align:center">Action</th>
     </tr>
   </thead>
 </table>
@@ -713,7 +713,7 @@ icon: 'success'
   }
 });$('#enroll').modal('hide');
 });
-                } );
+                });
                 </script>
               </body>
               </html>
