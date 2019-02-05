@@ -60,10 +60,10 @@ $user_id =  Auth::user()->id ;
   <thead>
     <tr>
       <th>#</th>
-      <th>User_ID</th>
-      <th>Club ID</th>
+      <th>User Name</th>
+      <th>Club Name</th>
       <th>Status</th>
-      <th style="width:280px" style="align:center">Action</th>
+      <th style="width:150px" style="align:center">Action</th>
       <input type="hidden" name="club_enroll_id" id="club_enroll_id" class="form-control" />
     </tr>
   </thead>
@@ -90,8 +90,8 @@ $('#admin_table').DataTable({
   "ajax": "{{ route('admin.admin_view') }}",
   "columns":[
     { "data": "id" },
-    { "data": "user_id" },
-    { "data": "club_id" },
+    { "data": "name" },
+    { "data": "club_name" },
     { "data": "status" },
     { "data": "action", orderable:false, searchable: false}
   ],

@@ -35,6 +35,7 @@
 
             <div align="right">
               <button type="button" name="MyClubs" id="myclubs" class="btn btn-success btn-sm myclubs">MyClubs</button>
+              <button type="button" name="ClubsHistory" id="clubhistory" class="btn btn-info btn-sm clubhistory">Club History</button>
             </div>
             <br />
             <table id="clubs_table" class="table table-bordered" style="width:100%">
@@ -74,6 +75,29 @@
   </div>
 </div>
 </div>
+
+<!-- Modal of MyClubs History -->
+<div class="modal" id="clubhistory_Modal" tabindex="-1" role="dialog" aria-labelledby="clubhistory_ModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="clubhistory_ModalLabel">View Clubs</h5>
+      <button type="button" class="close" id="clubhistory_Modalclose" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">{{csrf_field()}}
+      
+      <!-- add enroll button here -->
+    </div>
+    <div class="modal-footer">
+      <button type="button" id="clubhistory_Modalclose" class="btn btn-primary close_view" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+</div>
+
+
 @else
 <a href="login">Login Here</a>
 {!! dd(" YOU ARE NOT LOGGED IN ") !!}
@@ -173,6 +197,52 @@ e.preventDefault();
              $("#myclubs_Modal").find('.modal-body').text('You are Not Enrolled in any club');
            });
          });
-                });          
+                });
+
+
+
+
       });
 </script>
+<script>
+
+//sript for displaying clubs user is enrolled in
+     $(document).on('click', '.clubhistory', function(){
+       var id = $(this).attr("id");
+       var user_id ={{ Auth::user()->id}};
+       $.ajax({
+         url:'{{ url('clubhistory') }}/'+user_id,//this or $user_id
+         method:'get',
+         data:{id:id},
+         dataType:'json',
+         success:function(data)
+         {
+           $('#user_id').val(data.user_id);
+          // $('#club_id').val(data.club_id);
+           $('#action').val("myclubs");
+           //$('#view').modal('show');
+           $('#clubhistory_Modal').on('hidden.bs.modal', function (e) {
+             //location.reload();
+           });
+           $('#clubhistory_Modal').modal('show');
+           $('.modal-title').text('Clubs Enrolled In');
+           $('#button_action').val('clubhistory');
+           //alert(data.data[0].clubs);
+           alert(data.data[0].clubhistory);
+             $("#clubhistory_Modal").find('.modal-body').text(data.data[0].clubhistory);
+           
+           //$(".modal-body").text(data.data[0].clubhistory);
+         }
+       }) 
+    // });
+         //refresh my clubs modal on click
+         $(document).on('click', '.clubhistory_Modalclose', function(){
+           $('#clubhistory_Modal').on('hidden.bs.modal', function (e) {
+             //location.reload();
+             $("#clubhistory_Modal").find('.modal-body').empty();
+             $(this).removeData('bs.modal');
+             $("#clubhistory_Modal").find('.modal-body').text('You are Not Enrolled in any club');
+           });
+         });
+       });
+  </script>

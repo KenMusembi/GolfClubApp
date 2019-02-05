@@ -83,6 +83,23 @@ return View('admin');
           return response()->json(['data' => $myclubs]);
      }
 
+public  function clubhistory(Request $request, $user_id)
+     {       
+       $clubhistory = DB::table('clubs_registrations')
+        ->leftjoin('clubs','clubs.id','=','clubs_registrations.club_id')
+       ->leftjoin('users', 'users.id', '=','clubs_registrations.user_id')
+          ->where('users.id', $user_id)          
+          //->pluck('club_name')
+          //->groupby('users.id')
+->select('name','club_name','clubs_registrations.created_at','clubs_registrations.updated_at')
+         ->select(DB::raw('name',"GROUP_CONCAT( club_name SEPARATOR ' , ') as clubs"))
+          ->groupby('users.id')
+          ->distinct()
+          ->get();
+          return response()->json(['data' => $clubhistory]);
+     }
+
+
  public  function admin_enroll(Request $request, $user_id)
      {       
         $checker = DB::table('clubs_registrations')->where('user_id', $user_id)->where('club_id',  $request->get('id'))->select('clubs_registrations.id')->count();
@@ -100,7 +117,9 @@ $enrollment = new ClubsRegistration ([
 
 public function admin_view()
 {
-     $admin_view = ClubsRegistration::select('clubs_registrations.id', 'clubs_registrations.user_id','clubs_registrations.club_id', 'clubs_registrations.status');
+     $admin_view = ClubsRegistration::join('users','users.id','=','clubs_registrations.user_id')
+     ->join('clubs','clubs.id','=','clubs_registrations.club_id')
+     ->select('clubs_registrations.id', 'users.name','clubs.club_name', 'clubs_registrations.status');
             return Datatables::of($admin_view)
             ->addColumn('action', function ($admin)
            {
