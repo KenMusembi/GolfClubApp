@@ -16,31 +16,10 @@
                     @endif
 
                     You are logged in!
-                    <table id="example" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Club Name</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-</table>
-
-
+                   
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
-
-<script>
-     toastr.success("Table Data Loaded Succesfully", "Success!");
-     $(document).ready(function() {
-     $('#example').DataTable( {
-         "processing": true,
-         "serverSide": true,
-         "ajax": "ClubsDataTable.php"
-     } );
- } );
-</script>

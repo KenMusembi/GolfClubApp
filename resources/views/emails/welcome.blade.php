@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome Email</title>
+    <title>You have been enrolled</title>
 </head>
 
 <body>
-<h2>Welcome to the site {{$user['name']}}</h2>
+<h2>Welcome to the club </h2>
 <br/>
-Your registered email-id is {{$user['email']}}
+<p>The Admin has approved your request to join the Club</p>
 </body>
 
 </html>

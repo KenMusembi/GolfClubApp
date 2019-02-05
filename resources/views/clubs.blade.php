@@ -1,3 +1,4 @@
+@if (Auth::check())
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,25 +28,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
 </head>
 <body>
+                  
+          <div class="container"><br>
+             <?php $user_id =  Auth::user()->id ; ?></h4>
+            <h4 align="center">Golf Club App - {{Auth::user()->name}} Dashboard</h4>
 
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-You are logged in!
-                        </div>
-                    @endif
-                   <?php $user_id =  Auth::user()->id ;
-                    echo $user_id; ?>
-          <div class="container">
-            <h4 align="center">Golf Club App - Users Dashboard</h4>
             <div align="right">
               <button type="button" name="MyClubs" id="myclubs" class="btn btn-success btn-sm myclubs">MyClubs</button>
             </div>
@@ -87,9 +74,12 @@ You are logged in!
   </div>
 </div>
 </div>
+@else
+<a href="login">Login Here</a>
+{!! dd(" YOU ARE NOT LOGGED IN ") !!}
 
+@endif
 <script>
-
     // toastr.success("Table Data Loaded Succesfully", "Success!");
      $(document).ready(function() {
      $('#clubs_table').DataTable( {
@@ -105,7 +95,6 @@ You are logged in!
        //  "order": [[1, 0]]
        });
      
-
 $(document).on('click', '.enroll', function(e){
   var id = $(this).attr("id");
        var user_id ={{ Auth::user()->id}};
@@ -134,7 +123,6 @@ e.preventDefault();
           {
             //toastr.success('User Already Deleted', 'User Deleted')
             //  alert(data);
-
             $('#clubs_table').DataTable().ajax.reload();
           }
         })
@@ -144,7 +132,6 @@ e.preventDefault();
     }
   });
 });
-
      //sript for displaying clubs user is enrolled in
      $(document).on('click', '.myclubs', function(){
        var id = $(this).attr("id");
@@ -177,7 +164,6 @@ e.preventDefault();
          }
        }) 
     // });
-
          //refresh my clubs modal on click
          $(document).on('click', '.myclubs_Modalclose', function(){
            $('#myclubs_Modal').on('hidden.bs.modal', function (e) {
@@ -187,12 +173,6 @@ e.preventDefault();
              $("#myclubs_Modal").find('.modal-body').text('You are Not Enrolled in any club');
            });
          });
-
                 });          
-
       });
-
-
-
-
 </script>

@@ -1,4 +1,12 @@
+@if (Auth::check())
+<?php
+if(Auth::user()->id != 508){
+      echo "You must be logged in as an admin to access this page";
+      echo "<a href='login' >LogIn</a> ";
+       return Redirect::to('login')->with('message', 'Login Failed');
+       echo "You";
 
+}?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +41,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header"> Admin Dashboard</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -42,9 +50,12 @@
 
                         </div>
                     @endif
- <?php $user_id =  Auth::user()->id ;
-                    echo $user_id; ?>
-                    
+ <?php 
+$user_id =  Auth::user()->id ;
+ ?> 
+
+<br>
+
 <table id="admin_table" class="table table-bordered" style="width:100%">
   <thead>
     <tr>
@@ -52,7 +63,7 @@
       <th>User_ID</th>
       <th>Club ID</th>
       <th>Status</th>
-      <th style="width:" style="align:center">Action</th>
+      <th style="width:280px" style="align:center">Action</th>
       <input type="hidden" name="club_enroll_id" id="club_enroll_id" class="form-control" />
     </tr>
   </thead>
@@ -65,7 +76,11 @@
 
 </body>
 </html>
+@else
+<a href="login">Login Here</a>
+{!! dd(" YOU ARE NOT LOGGED IN ") !!}
 
+@endif
 <script type="text/javascript">
     
    $(document).ready(function() {
@@ -86,7 +101,7 @@ $('#admin_table').DataTable({
 //script for the approve function
 $(document).on('click', '.approve', function(e){
   var id = $(this).attr("id");
-      // var user_id ={{ Auth::user()->id}};
+  
 
 e.preventDefault();
   swal({
@@ -122,6 +137,9 @@ e.preventDefault();
       swal("Denied", "You have Denied User to Enroll from Club:)", "error");
     }
   });
+
+
+
 });
 
 //script for the deny function
@@ -159,7 +177,7 @@ e.preventDefault();
         })
       });
     } else {
-      swal("Aborted", "You have Aborted this operation)", "error");
+      swal("Aborted", "You have Aborted this operation:)", "error");
     }
   });
 });
