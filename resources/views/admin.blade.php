@@ -5,8 +5,8 @@ if(Auth::user()->id != 508){
       echo "<a href='login' >LogIn</a> ";
        return Redirect::to('login')->with('message', 'Login Failed');
        echo "You";
-
 }?>
+@extends('layouts.master')
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +36,7 @@ if(Auth::user()->id != 508){
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
 </head>
 <body>
-
+<br><br><br><br><br><br><br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -97,12 +97,10 @@ $('#admin_table').DataTable({
   ],
 //  "order": [[1, 0]]
 });
-
 //script for the approve function
 $(document).on('click', '.approve', function(e){
   var id = $(this).attr("id");
   
-
 e.preventDefault();
   swal({
     title: "Are you sure?",
@@ -137,11 +135,7 @@ e.preventDefault();
       swal("Denied", "You have Denied User to Enroll from Club:)", "error");
     }
   });
-
-
-
 });
-
 //script for the deny function
 $(document).on('click', '.deny', function(e){
   var id = $(this).attr("id");
@@ -181,6 +175,5 @@ e.preventDefault();
     }
   });
 });
-
 });
 </script>

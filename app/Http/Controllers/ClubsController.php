@@ -13,6 +13,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\ClubsRegistration;
 use Mail;
+use Auth;
 
 class ClubsController extends Controller
 {
@@ -76,27 +77,22 @@ return View('admin');
           ->where('clubs_registrations.status','approved')
           //->pluck('club_name')
           //->groupby('users.id')
-         ->select(DB::raw("GROUP_CONCAT( club_name SEPARATOR ' , ') as clubs"))
+         ->select('name', DB::raw("GROUP_CONCAT( club_name SEPARATOR ' , ') as clubs"))
           ->groupby('users.id')
           ->distinct()
           ->get();
           return response()->json(['data' => $myclubs]);
      }
 
-public  function clubhistory(Request $request, $user_id)
-     {       
-       $clubhistory = DB::table('clubs_registrations')
-        ->leftjoin('clubs','clubs.id','=','clubs_registrations.club_id')
-       ->leftjoin('users', 'users.id', '=','clubs_registrations.user_id')
-          ->where('users.id', $user_id)          
-          //->pluck('club_name')
-          //->groupby('users.id')
-->select('name','club_name','clubs_registrations.created_at','clubs_registrations.updated_at')
-         ->select(DB::raw('name',"GROUP_CONCAT( club_name SEPARATOR ' , ') as clubs"))
-          ->groupby('users.id')
-          ->distinct()
-          ->get();
-          return response()->json(['data' => $clubhistory]);
+public  function clubhistory(Request $request)
+     {   
+     $user_id = Auth::user()->id;    
+     //var_dump($user_id);
+       $history = ClubsRegistration::join('clubs','clubs_registrations.club_id','=','clubs.id')
+            //->join()
+            ->select('clubs.club_name','clubs_registrations.created_at', 'clubs_registrations.updated_at','clubs_registrations.status')->where('user_id',$user_id);
+            return Datatables::of($history)->make(true);
+
      }
 
 

@@ -39,7 +39,8 @@ Route::get('/home', function(){
 Route::get('clubs', 'ClubsController@index')->name('clubs');
 Route::get('clubs/getdata', 'ClubsController@getdata')->name('clubs.getdata');
 Route::get('myclubs/{user_id}', 'ClubsController@myclubs')->name('myclubs');
-Route::get('clubhistory/{user_id}', 'ClubsController@clubhistory')->name('clubhistory');
+Route::get('clubhistory', 'ClubsController@clubhistory')->name('clubhistory');
+
 
 Route::get('admin', 'ClubsController@index2')->name('admin');
 Route::get('admin_enroll/{user_id}', 'ClubsController@admin_enroll')->name('admin_enroll');

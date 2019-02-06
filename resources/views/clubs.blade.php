@@ -1,4 +1,5 @@
 @if (Auth::check())
+@extends('layouts.master')
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,14 +29,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
 </head>
 <body>
-                  
+                  <br><br><br><br><br><br><br>
           <div class="container"><br>
              <?php $user_id =  Auth::user()->id ; ?></h4>
             <h4 align="center">Golf Club App - {{Auth::user()->name}} Dashboard</h4>
 
             <div align="right">
-              <button type="button" name="MyClubs" id="myclubs" class="btn btn-success btn-sm myclubs">MyClubs</button>
-              <button type="button" name="ClubsHistory" id="clubhistory" class="btn btn-info btn-sm clubhistory">Club History</button>
+              <button type="button" name="MyClubs" id="myclubs" class="btn btn-success btn-sm myclubs">MyClubs</button>              
             </div>
             <br />
             <table id="clubs_table" class="table table-bordered" style="width:100%">
@@ -48,13 +48,21 @@
                 </tr>
               </thead>
             </table>
-          </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<hr><br><br><hr>
+<h3>Club History</h3>
+<table id="history_table" class="table table-bordered" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Club Name</th>
+                  <th>Created At</th>
+                  <th>Updated At</th>                  
+                  <th>Status</th>
+                </tr>
+              </thead>
+            </table>
 
+          </div>
+                
 <!-- Modal of MyClubs -->
 <div class="modal" id="myclubs_Modal" tabindex="-1" role="dialog" aria-labelledby="myclubs_ModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
@@ -76,28 +84,7 @@
 </div>
 </div>
 
-<!-- Modal of MyClubs History -->
-<div class="modal" id="clubhistory_Modal" tabindex="-1" role="dialog" aria-labelledby="clubhistory_ModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="clubhistory_ModalLabel">View Clubs</h5>
-      <button type="button" class="close" id="clubhistory_Modalclose" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">{{csrf_field()}}
-      
-      <!-- add enroll button here -->
-    </div>
-    <div class="modal-footer">
-      <button type="button" id="clubhistory_Modalclose" class="btn btn-primary close_view" data-dismiss="modal">Close</button>
-    </div>
-  </div>
-</div>
-</div>
-
-
+<br><br><br><br><br>
 @else
 <a href="login">Login Here</a>
 {!! dd(" YOU ARE NOT LOGGED IN ") !!}
@@ -199,50 +186,24 @@ e.preventDefault();
          });
                 });
 
-
-
-
       });
 </script>
 <script>
 
-//sript for displaying clubs user is enrolled in
-     $(document).on('click', '.clubhistory', function(){
-       var id = $(this).attr("id");
-       var user_id ={{ Auth::user()->id}};
-       $.ajax({
-         url:'{{ url('clubhistory') }}/'+user_id,//this or $user_id
-         method:'get',
-         data:{id:id},
-         dataType:'json',
-         success:function(data)
-         {
-           $('#user_id').val(data.user_id);
-          // $('#club_id').val(data.club_id);
-           $('#action').val("myclubs");
-           //$('#view').modal('show');
-           $('#clubhistory_Modal').on('hidden.bs.modal', function (e) {
-             //location.reload();
-           });
-           $('#clubhistory_Modal').modal('show');
-           $('.modal-title').text('Clubs Enrolled In');
-           $('#button_action').val('clubhistory');
-           //alert(data.data[0].clubs);
-           alert(data.data[0].clubhistory);
-             $("#clubhistory_Modal").find('.modal-body').text(data.data[0].clubhistory);
-           
-           //$(".modal-body").text(data.data[0].clubhistory);
-         }
-       }) 
-    // });
-         //refresh my clubs modal on click
-         $(document).on('click', '.clubhistory_Modalclose', function(){
-           $('#clubhistory_Modal').on('hidden.bs.modal', function (e) {
-             //location.reload();
-             $("#clubhistory_Modal").find('.modal-body').empty();
-             $(this).removeData('bs.modal');
-             $("#clubhistory_Modal").find('.modal-body').text('You are Not Enrolled in any club');
-           });
-         });
-       });
+$(document).ready(function() {  
+     $('#history_table').DataTable( {
+         "processing": true,
+         "responsive": true,  
+         "serverSide": true,
+         "ajax": "{{ route('clubhistory') }}",                  
+         "columns":[
+           { "data": "club_name" },
+           { "data": "created_at" },
+           { "data": "updated_at" },
+           { "data": "status"}
+         ],
+       //  "order": [[1, 0]]
+       });     
+
+   });
   </script>

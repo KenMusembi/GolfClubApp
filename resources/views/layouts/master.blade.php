@@ -1,189 +1,312 @@
+
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Starter</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="bower_components/admin-lte/dist/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-        page. However, you can choose any other skin. Make sure you
-        apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="bower_components/admin-lte/dist/css/skins/skin-blue.min.css">
+<title>Golf Club App </title>
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="images/favicon.ico">
 
-  <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        <!--Morris Chart CSS -->
+        <link rel="stylesheet" href="plugins/morris/morris.css">
 
-<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.0/css/buttons.bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.4/css/select.bootstrap.min.css">
+        <!-- App css -->
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="css/icons.css" rel="stylesheet" type="text/css" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.0/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/select/1.2.4/js/dataTables.select.min.js"></script>
 
-<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.0/js/buttons.bootstrap.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <!-- DataTables -->
+        <link href="plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <!-- Responsive datatable examples -->
+        <link href="plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <!-- Multi Item Selection examples -->
+        <link href="plugins/datatables/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<!--datatable links -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
-</head>
-        
-</head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+        <script src="js/modernizr.min.js"></script>
+<body>
 
-  <!-- Main Header -->
-  <header class="main-header">
+        <!-- Navigation Bar-->
+        <header id="topnav">
+            <div class="topbar-main">
+                <div class="container-fluid">
 
-    <!-- Logo -->
-    <a href="/" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">Golf Club Admin    </span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>Golf Club</span>
-    </a>
+                    <!-- Logo container-->
+                    <div class="logo">
+                        <!-- Text Logo -->
+                        <!--<a href="index.html" class="logo">-->
+                            <!--<span class="logo-small"><i class="mdi mdi-radar"></i></span>-->
+                            <!--<span class="logo-large"><i class="mdi mdi-radar"></i> Golf CLub Admin</span>-->
+                        <!--</a>-->
+                        <!-- Image Logo -->
+                        <a href="index.html" class="logo">
+                            <img src="images/logo-sm.png" alt="" height="26" class="logo-small">
+                            <img src="images/logo.png" alt="" height="24" class="logo-large">
+                        </a>
 
-@if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                    </div>
+                    <!-- End Logo container-->
 
-                        </div>
-                    @endif
- 
 
-    <!-- Header Navbar -->
-    <!--
-    <nav class="navbar navbar-static-top" role="navigation">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-      <!-- Navbar Right Menu -->
-      </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+                    <div class="menu-extras topbar-custom">
 
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+                        <ul class="list-unstyled topbar-right-menu float-right mb-0">
 
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="bower_components/admin-lte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p><?php $user_name =  Auth::user()->name ;
-                    echo $user_name; ?></p>
-          <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
+                            <li class="menu-item">
+                                <!-- Mobile menu toggle-->
+                                <a class="navbar-toggle nav-link">
+                                    <div class="lines">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </a>
+                                <!-- End mobile menu toggle-->
+                            </li>
+                            <li class="hide-phone">
+                                <form class="app-search">
+                                    <input type="text" placeholder="Search..."
+                                           class="form-control">
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                </form>
+                            </li>
+                            <li>
+                                <!-- Notification -->
+                                <div class="notification-box">
+                                    <ul class="list-inline mb-0">
+                                        <li>
+                                            <a href="javascript:void(0);" class="right-bar-toggle">
+                                                <i class="mdi mdi-bell-outline noti-icon"></i>
+                                            </a>
+                                            <div class="noti-dot">
+                                                <span class="dot"></span>
+                                                <span class="pulse"></span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- End Notification bar -->
+                            </li>
 
-      
-      <!-- Sidebar Menu -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">Administrator</li>
-        <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="home"><i class="fa fa-link"></i> <span>Home</span></a></li>
-        <li><a href="welcome"><i class="fa fa-link"></i> <span>Users</span></a></li>
-        <li><a href="clubs"><i class="fa fa-link"></i> <span>Clubs</span></a></li>
+                            <li class="dropdown notification-list">
+                                <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+                                   aria-haspopup="false" aria-expanded="false">
+                                    <img src="images/users/avatar-1.jpg" alt="user" class="rounded-circle">
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
 
-      </ul>
-      <!-- /.sidebar-menu -->
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <i class="ti-user m-r-5"></i> Profile
+                                    </a>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Golf CLub Admin
-        <small>Logged In!</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Pages</a></li>
-        <li class="active">Home</li>
-      </ol>
-    </section>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <i class="ti-settings m-r-5"></i> Settings
+                                    </a>
 
-    <!-- Main content -->
-    <section class="content container-fluid">
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <i class="ti-lock m-r-5"></i> Lock screen
+                                    </a>
 
-      @yield('content')
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <i class="ti-power-off m-r-5"></i> Logout
+                                    </a>
 
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+                                </div>
+                            </li>
 
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="pull-right hidden-xs">
-     The Golf Club App
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2019 <a href="/">Golfclub</a>.</strong> All rights reserved.
-  </footer>
+                        </ul>
+                    </div>
+                    <!-- end menu-extras -->
 
-  <!-- Control Sidebar -->
+                    <div class="clearfix"></div>
 
-<!-- REQUIRED JS SCRIPTS -->
+                </div> <!-- end container -->
+            </div>
+            <!-- end topbar-main -->
 
-<!-- jQuery 3 -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="bower_components/admin-lte/dist/js/adminlte.min.js"></script>
+            <div class="navbar-custom">
+                <div class="container-fluid">
+                    <div id="navigation">
+                        <!-- Navigation Menu-->
+                        <ul class="navigation-menu">
+                            <li class="has-submenu">
+                                <a href="index.html"><i class="mdi mdi-view-dashboard"></i> <span> Dashboard </span> </a>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="#"><i class="mdi mdi-invert-colors"></i> <span> User Interface </span> </a>
+                                <ul class="submenu megamenu">
+                                    <li>
+                                        <ul>
+                                            <li><a href="ui-buttons.html">Buttons</a></li>
+                                            <li><a href="ui-cards.html">Cards</a></li>
+                                            <li><a href="ui-draggable-cards.html">Draggable Cards</a></li>
+                                            <li><a href="ui-typography.html">Typography </a></li>
+                                            <li><a href="ui-checkbox-radio.html">Checkboxs-Radios</a></li>
+                                            <li><a href="ui-material-icons.html">Material Design Icons</a></li>
+                                            <li><a href="ui-font-awesome-icons.html">Font Awesome</a></li>
+                                            <li><a href="ui-themify-icons.html">Themify Icons</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul>
+                                            <li><a href="ui-dripicons.html">Dripicons</a></li>
+                                            <li><a href="ui-modals.html">Modals</a></li>
+                                            <li><a href="ui-notification.html">Notification</a></li>
+                                            <li><a href="ui-range-slider.html">Range Slider</a></li>
+                                            <li><a href="ui-components.html">Components</a>
+                                            <li><a href="ui-sweetalert.html">Sweet Alert</a>
+                                            <li><a href="ui-treeview.html">Tree view</a>
+                                            <li><a href="ui-widgets.html">Widgets</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
 
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
+                            <li class="has-submenu">
+                                <a href="#"><i class="mdi mdi-texture"></i><span> Forms </span> </a>
+                                <ul class="submenu">
+                                    <li><a href="form-elements.html">General Elements</a></li>
+                                    <li><a href="form-advanced.html">Advanced Form</a></li>
+                                    <li><a href="form-validation.html">Form Validation</a></li>
+                                    <li><a href="form-wizard.html">Form Wizard</a></li>
+                                    <li><a href="form-fileupload.html">Form Uploads</a></li>
+                                    <li><a href="form-wysiwig.html">Wysiwig Editors</a></li>
+                                    <li><a href="form-xeditable.html">X-editable</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="mdi mdi-view-list"></i> <span> Tables </span> </a>
+                                <ul class="submenu">
+                                    <li><a href="tables-basic.html">Basic Tables</a></li>
+                                    <li><a href="tables-datatable.html">Data Table</a></li>
+                                    <li><a href="tables-responsive.html">Responsive Table</a></li>
+                                    <li><a href="tables-editable.html">Editable Table</a></li>
+                                    <li><a href="tables-tablesaw.html">Tablesaw Table</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="mdi mdi-chart-donut-variant"></i><span> Charts </span> </a>
+                                <ul class="submenu">
+                                    <li><a href="chart-flot.html">Flot Chart</a></li>
+                                    <li><a href="chart-morris.html">Morris Chart</a></li>
+                                    <li><a href="chart-chartist.html">Chartist Charts</a></li>
+                                    <li><a href="chart-chartjs.html">Chartjs Chart</a></li>
+                                    <li><a href="chart-other.html">Other Chart</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="mdi mdi-google-pages"></i><span> Pages </span> </a>
+                                <ul class="submenu">
+                                    <li><a href="page-starter.html">Starter Page</a></li>
+                                    <li><a href="page-login.html">Login</a></li>
+                                    <li><a href="page-register.html">Register</a></li>
+                                    <li><a href="page-recoverpw.html">Recover Password</a></li>
+                                    <li><a href="page-lock-screen.html">Lock Screen</a></li>
+                                    <li><a href="page-confirm-mail.html">Confirm Mail</a></li>
+                                    <li><a href="page-404.html">Error 404</a></li>
+                                    <li><a href="page-500.html">Error 500</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="mdi mdi-layers"></i><span>Extra Pages </span> </a>
+                                <ul class="submenu megamenu">
+                                    <li>
+                                        <ul>
+                                            <li><a href="extras-projects.html">Projects</a></li>
+                                            <li><a href="extras-tour.html">Tour</a></li>
+                                            <li><a href="extras-taskboard.html">Taskboard</a></li>
+                                            <li><a href="extras-inbox.html">Mail</a></li>
+                                            <li><a href="extras-taskdetail.html">Task Detail</a></li>
+                                            <li><a href="extras-maps.html">Maps</a></li>
+                                            <li><a href="extras-calendar.html" >Calendar</a></li>
+                                            <li><a href="extras-contact.html">Contact list</a></li>
+                                            <li><a href="extras-pricing.html">Pricing</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul>
+                                            <li><a href="extras-timeline.html">Timeline</a></li>
+                                            <li><a href="extras-invoice.html">Invoice</a></li>
+                                            <li><a href="extras-profile.html">Profile</a></li>
+                                            <li><a href="extras-faq.html">FAQ</a></li>
+                                            <li><a href="extras-gallery.html">Gallery</a></li>
+                                            <li><a href="extras-email-template.html">Email template</a></li>
+                                            <li><a href="extras-maintenance.html">Maintenance</a></li>
+                                            <li><a href="extras-comingsoon.html">Coming soon</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- End navigation menu -->
+                    </div> <!-- end #navigation -->
+                </div> <!-- end container -->
+            </div> <!-- end navbar-custom -->
+        </header>
+        <!-- End Navigation Bar-->
+
+
+
+
+
+
 </body>
 </html>
+
+  <!-- jQuery  -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/waves.js"></script>
+        <script src="js/jquery.slimscroll.js"></script>
+
+        <!-- KNOB JS -->
+        <!--[if IE]>
+        <script type="text/javascript" src="plugins/jquery-knob/excanvas.js"></script>
+        <![endif]-->
+        <script src="plugins/jquery-knob/jquery.knob.js"></script>
+
+        <!--Morris Chart-->
+        <script src="plugins/morris/morris.min.js"></script>
+        <script src="plugins/raphael/raphael-min.js"></script>
+
+        <!-- Dashboard init -->
+        <script src="pages/jquery.dashboard.js"></script>
+
+
+        <!-- App js -->
+        <script src="js/jquery.core.js"></script>
+        <script src="js/jquery.app.js"></script>
+
+        <!-- Required datatable js -->
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap4.min.js"></script>
+        <!-- Buttons examples -->
+        <script src="plugins/datatables/dataTables.buttons.min.js"></script>
+        <script src="plugins/datatables/buttons.bootstrap4.min.js"></script>
+        <script src="plugins/datatables/jszip.min.js"></script>
+        <script src="plugins/datatables/pdfmake.min.js"></script>
+        <script src="plugins/datatables/vfs_fonts.js"></script>
+        <script src="plugins/datatables/buttons.html5.min.js"></script>
+        <script src="plugins/datatables/buttons.print.min.js"></script>
+
+        <!-- Key Tables -->
+        <script src="plugins/datatables/dataTables.keyTable.min.js"></script>
+
+        <!-- Responsive examples -->
+        <script src="plugins/datatables/dataTables.responsive.min.js"></script>
+        <script src="plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+        <!-- Selection table -->
+        <script src="plugins/datatables/dataTables.select.min.js"></script>
+
+        
