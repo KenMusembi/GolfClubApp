@@ -37,10 +37,10 @@ function index()
      return Datatables::of($users)
      ->addColumn('action', function ($user)
     {
-        return '<a href="#" class="btn btn-xs btn-primary edit" id="'.$user->id.'"><i class="glyphicon glyphicon-edit"></i> Update</a>
-        <a href="#" class="btn btn-xs btn-danger delete" id="'.$user->id.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>
-       <a href="#" class="btn btn-xs btn-success view" id="'.$user->id.'"><i class="glyphicon glyphicon-user"></i> ViewClub</a>
-       <a href="#" class="btn btn-xs btn-warning enroll" id="'.$user->id.'"><i class="glyphicon glyphicon-plus"></i> Enroll</a>
+        return '<a href="#" class="btn btn-sm btn-success view" id="'.$user->id.'"><i class="glyphicon glyphicon-user"></i> ViewClub</a>
+        <a href="#" class="btn btn-sm btn-primary edit" id="'.$user->id.'"><i class="glyphicon glyphicon-edit"></i> Update</a>            
+       <a href="#" class="btn btn-sm btn-warning enroll" id="'.$user->id.'"><i class="glyphicon glyphicon-plus"></i> Enroll</a>
+       <a href="#" class="btn btn-sm btn-danger delete" id="'.$user->id.'"><i class="glyphicon glyphicon-remove"></i> Delete</a> 
        ';
     })->make(true);
     }

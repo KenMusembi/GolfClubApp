@@ -36,14 +36,16 @@ if(Auth::user()->id != 508){
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
 </head>
 <body>
-<br><br><br><br><br><br><br>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header"> Admin Dashboard</div>
+ <div class="wrapper">
+            <div class="container-fluid">
+ <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">                        
+                        <h4 class="page-title mdi mdi-account"> Admin Dashboard</h4>
+                    </div>
+                </div>
+                <!-- end page title end breadcrumb -->
 
-                <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -53,27 +55,184 @@ if(Auth::user()->id != 508){
  <?php 
 $user_id =  Auth::user()->id ;
  ?> 
+<div class="row">
 
-<br>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card-box">
+                            <div class="dropdown pull-right">
+                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-dots-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Another action</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Something else</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                                </div>
+                            </div>
 
-<table id="admin_table" class="table table-bordered" style="width:100%">
+                            <h4 class="header-title mt-0 m-b-30">Users</h4>
+
+                            <div class="widget-chart-1">
+                                <div class="widget-chart-box-1">
+                                    <input data-plugin="knob" data-width="80" data-height="80" data-fgColor="#f05050 "
+                                           data-bgColor="#F9B9B9" value="72"
+                                           data-skin="tron" data-angleOffset="180" data-readOnly=true
+                                           data-thickness=".15"/>
+                                </div>
+
+                                <div class="widget-detail-1">
+                                    <h2 class="p-t-10 mb-0"> 512 </h2>
+                                    <p class="text-muted m-b-10">Users</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+               
+
+<div class="col-xl-3 col-md-6">
+                        <div class="card-box">
+                            <div class="dropdown pull-right">
+                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-dots-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Another action</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Something else</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                                </div>
+                            </div>
+
+                            <h4 class="header-title m-t-0 m-b-30">Clubs Enrollment</h4>
+
+                            <p class="font-600 m-b-5"> Mara <span class="text-primary pull-right">80%</span></p>
+                            <div class="progress progress-bar-primary-alt progress-sm m-b-20">
+                                <div class="progress-bar progress-bar-primary progress-animated wow animated animated" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%; visibility: visible; animation-name: animationProgress;">
+                                </div><!-- /.progress-bar .progress-bar-danger -->
+                            </div><!-- /.progress .no-rounded -->
+                            <p class="font-600 m-b-5">Mamba <span class="text-danger pull-right">65%</span></p>
+                            <div class="progress progress-bar-danger-alt progress-sm m-b-20">
+                                <div class="progress-bar progress-bar-danger progress-animated wow animated animated" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%; visibility: visible; animation-name: animationProgress;">
+                                </div><!-- /.progress-bar .progress-bar-warning -->
+                            </div><!-- /.progress .no-rounded -->
+</div></div>
+
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card-box">
+                            <div class="dropdown pull-right">
+                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-dots-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Another action</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Something else</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                                </div>
+                            </div>
+
+                            <h4 class="header-title m-t-0 m-b-30"><i class="mdi mdi-notification-clear-all m-r-5"></i> Upcoming Reminders</h4>
+
+                            <ul class="list-group m-b-0 user-list">
+                                <li class="list-group-item">
+                                    <a href="#" class="user-list-item">
+                                        <div class="avatar">
+                                            <i class="mdi mdi-circle text-primary"></i>
+                                        </div>
+                                        <div class="user-desc">
+                                            <span class="name">Meet Manager</span>
+                                            <span class="desc">February 29, 2019 - 10:30am to 12:45pm</span>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <a href="#" class="user-list-item">
+                                        <div class="avatar">
+                                            <i class="mdi mdi-circle text-success"></i>
+                                        </div>
+                                        <div class="user-desc">
+                                            <span class="name">Project Discussion</span>
+                                            <span class="desc">February 19, 2019 - 10:30am to 12:45pm</span>
+                                        </div>
+                                    </a>
+                                </li>
+                               
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card-box">
+                            <div class="dropdown pull-right">
+                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-dots-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Another action</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Something else</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                                </div>
+                            </div>
+                            <h4 class="header-title mt-0 m-b-30">Club Intake</h4>
+
+                            <div class="widget-box-2">
+                                <div class="widget-detail-2">
+                                    <span class="badge badge-pink badge-pill pull-left m-t-20">32% <i class="mdi mdi-trending-up"></i> </span>
+                                    <h2 class="mb-0"> 158 </h2>
+                                    <p class="text-muted m-b-25">Intake this week</p>
+                                </div>
+                                <div class="progress progress-bar-pink-alt progress-sm mb-0">
+                                    <div class="progress-bar progress-bar-pink" role="progressbar"
+                                         aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"
+                                         style="width: 77%;">
+                                        <span class="sr-only">77% Complete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end col -->                    
+</div>
+
+
+<div class="card-box">
+     <h4 class="header-title mt-0 m-b-30">User Enrollment</h4>
+<table id="admin_table" class="table table-hover    " style="width:100%">
   <thead>
     <tr>
       <th>#</th>
       <th>User Name</th>
       <th>Club Name</th>
       <th>Status</th>
-      <th style="width:180px" style="align:center">Action</th>
+      <th style="width:225px" style="align:center">Action</th>
       <input type="hidden" name="club_enroll_id" id="club_enroll_id" class="form-control" />
     </tr>
   </thead>
-</table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+</table></div>
+                
+</div></div>
 </body>
 </html>
 @else
@@ -84,16 +243,16 @@ $user_id =  Auth::user()->id ;
 <script type="text/javascript">
     
    $(document).ready(function() {
-$('#admin_table').DataTable({
+$('#admin_table').DataTable({  
   "processing": true,
   "serverSide": true,
-  "ajax": "{{ route('admin.admin_view') }}",
+  "ajax": "{{ route('admin.admin_view') }}",  
   "columns":[
     { "data": "id" },
     { "data": "name" },
     { "data": "club_name" },
-    { "data": "status" },
-    { "data": "action", orderable:false, searchable: false}
+    { "data": "status" }, 
+    { "data": "action", orderable:false, searchable: false},    
   ],
 //  "order": [[1, 0]]
 });

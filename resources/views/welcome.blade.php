@@ -35,24 +35,52 @@ if(Auth::user()->id != 508){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
 </head>
-<body>
-<br><br><br><br><br><br>
-<div class="container">
-<h4 align="center">Golf Club App</h4>
-<div align="right">
-  <button type="button" name="add" id="add_data" class="btn btn-success btn-sm">Add</button><br>
-</div>
-<table id="user_table" class="table table-bordered" style="width:100%">
+<body> <div class="wrapper">
+            <div class="container-fluid">
+ <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="btn-group pull-right m-t-20">
+                            <button type="button" class="btn btn-custom dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Settings </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                            </div>
+                        </div>
+                        <h4 class="page-title mdi mdi-account-multiple"> Admin Dashboard - Users</h4>
+                    </div>
+                </div>
+                <!-- end page title end breadcrumb -->
+
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+
+                        </div>
+                    @endif
+ <?php 
+$user_id =  Auth::user()->id ;
+ ?> 
+
+
+<div class="card-box"> 
+<table id="user_table" class="table table-hover" style="width:100%">
   <thead>
     <tr>
       <th>#</th>
       <th>Name</th>
       <th>Email</th>
-      <th style="width:280px" style="align:center">Action</th>
+      <th style="width:320px" style="align:center">Action</th>
     </tr>
   </thead>
 </table>
-</div>
+
 
 <!-- Modal of edit and add -->
 <div id="userModal" class="modal" role="dialog">
@@ -111,47 +139,74 @@ if(Auth::user()->id != 508){
 </div>
 
 <!-- Modal of enroll -->
-<div id="enroll" class="modal" role="dialog">
+<div id="enroll" class="modal" role="dialog" aria-hidden="true" tabindex="-1">
 <div class="modal-dialog" role="document">
   <div class="modal-content">
-    <form method="post" id="enroll_form">
+   
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Enroll To Club</h4>
-        <p>Once you click a checkbox, the user will be enrolled to that Club.</p>
+        <button type="button" class="close" data-dismiss="modal" aria-hiden="true"></button>
+        <h3 class="modal-title mt-0 " align="center">Enroll To Club</h3><br>        
       </div>
       <div class="modal-body">
         {{csrf_field()}}
         <span id="form_output"></span>
         <div class="form-group">
-          <label>Enroll User</label>
+          <p>Once you click a checkbox, the user will be enrolled to that Club.</p>
           <input type="hidden" name="enroll_user_id" id="enroll_user_id" class="form-control" />
           <input type="hidden" name="enroll_club_id" id="enroll_club_id" class="form-control" />
         </div>
         <br>
-        <input type="checkbox" name="feature1" class="Mara"  id="Mara" value="Mara"><label>Mara</label><br>
-        <input type="checkbox" name="feature2" class="Maasai"  id="Maasai" value="Maasai"><label>Maasai</label><br>
-        <input type="checkbox" name="feature3" class="Mamba"  id="Mamba" value="Mamba"><label>Mamba</label><br>
-        <input type="checkbox" name="feature4" class="Samburu"  id="Samburu" value="Samburu"><label>Samburu</label><br>
-        <input type="checkbox" name="feature5" class="Olive"  id="Olive" value="Olive"><label>Olive</label><br>
-        <input type="checkbox" name="feature6" class="Razors"  id="Razors" value="Razors"><label>Razors</label><br>
-        <input type="checkbox" name="feature7" class="Warriors"  id="Warriors" value="Warriors"><label>Warriors</label><br>
-        <input type="checkbox" name="feature8" class="Golag"  id="Golag" value="Golag"><label>Golag</label><br>
-        <input type="checkbox" name="feature9" class="Archipelo"  id="Archipelo" value="Archipelo"><label>Archipelo</label><br>
-        <input type="checkbox" name="feature10" class="Buffalo"  id="Buffalo" value="Buffalo"><label>Buffalo</label><br>
-      </div>
+<div class=" checkbox checkbox-success">
+        <input type="checkbox" class="Mara " id="Mara">
+        <label class="custom-control-label" for="Mara">Mara</label><br>
+
+        <input type="checkbox" class="Maasai "  id="Maasai">
+        <label class="custom-control-label" for="Maasai">Maasai</label><br>
+
+        <input type="checkbox" name="feature3" class="Mamba "  id="Mamba" value="Mamba">
+         <label class="custom-control-label" for="Mamba">Mamba</label><br>
+
+        <input type="checkbox" name="feature4" class="Samburu "  id="Samburu" value="Samburu">
+         <label class="custom-control-label" for="Samburu">Samburu</label><br>
+      
+        <input type="checkbox" name="feature5" class="Olive "  id="Olive" value="Olive">
+         <label class="custom-control-label" for="Olive">Olive</label><br>
+
+        <input type="checkbox" name="feature6" class="Razors "  id="Razors" value="Razors">
+         <label class="custom-control-label" for="Razors">Razors</label><br>
+
+        <input type="checkbox" name="feature7" class="Warriors "  id="Warriors" value="Warriors">
+        <label class="custom-control-label" for="Warriors">Warriors</label><br>
+
+        <input type="checkbox" name="feature8" class="Golag "  id="Golag" value="Golag">
+         <label class="custom-control-label" for="Golag">Golag</label><br>
+
+        <input type="checkbox" name="feature9" class="Archipelo "  id="Archipelo" value="Archipelo">
+         <label class="custom-control-label" for="Archipelo">Archipelo</label><br>
+      
+        <input type="checkbox" name="feature10" class="Buffalo "  id="Buffalo" value="Buffalo">
+         <label class="custom-control-label" for="Buffalo">Buffalo</label><br>
+      </div></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id="close_button" data-dismiss="modal">Close</button>
       </div>
     </form>
   </div>
 </div>
-</div>
+</div></div></div>
 @else
 <a href="login">Login Here</a>
 {!! dd(" YOU ARE NOT LOGGED IN ") !!}
 
 @endif
+
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script type="text/javascript">
 $(document).ready(function() {
 $('#user_table').DataTable({

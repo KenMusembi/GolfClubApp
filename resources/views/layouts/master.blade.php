@@ -96,25 +96,13 @@
                                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
 
                                     <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <a href="profile" class="dropdown-item notify-item">
                                         <i class="ti-user m-r-5"></i> Profile
                                     </a>
 
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <i class="ti-settings m-r-5"></i> Settings
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <i class="ti-lock m-r-5"></i> Lock screen
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <i class="ti-power-off m-r-5"></i> Logout
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                   
+                                   
+                                    <a class="dropdown-item" href="logout"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" class="dropdown-item notify-item">
                                        <i class="ti-power-off m-r-5"></i> {{ __('Logout') }}
@@ -142,11 +130,14 @@
                                 <a href="admin"><i class="mdi mdi-view-dashboard"></i> <span> Dashboard </span> </a>
                             </li>
                             <li class="has-submenu">
-                                <a href="clubs"><i class="mdi mdi-invert-colors"></i> <span> Clubs </span> </a>                                
+                                <a href="profile"><i class="mdi mdi-account"></i> <span> Profile </span> </a>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="clubs"><i class="mdi mdi-clipboard-text"></i> <span> Clubs </span> </a>                                
                             </li>
 
                             <li class="has-submenu">
-                                <a href="users"><i class="mdi mdi-texture"></i><span> Users </span> </a>                               
+                                <a href="users"><i class="mdi mdi-account-multiple"></i><span> Users </span> </a>                               
                             </li>
 
                            

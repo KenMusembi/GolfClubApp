@@ -1330,7 +1330,7 @@ pre {
    Buttons
 ============= */
 .btn {
-  border-radius: 2px;
+  border-radius: 9px;
   padding: 6px 14px;
   font-size: 14px;
   box-shadow: none !important;

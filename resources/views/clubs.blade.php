@@ -29,15 +29,44 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
 </head>
 <body>
-                  <br><br><br><br><br><br>
-          <div class="container"><br>
-             <?php $user_id =  Auth::user()->id ; ?></h4>
-            <h4 align="center">Golf Club App - {{Auth::user()->name}} Dashboard</h4>
+         <div class="wrapper">
+            <div class="container-fluid">
+ <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="btn-group pull-right m-t-20">
+                            <button type="button" class="btn btn-custom dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Settings </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                            </div>
+                        </div>
+                        <h4 class="page-title mdi mdi-clipboard-text"> Admin Dashboard - Clubs</h4>
+                    </div>
+                </div>
+                <!-- end page title end breadcrumb -->
 
-            <div align="right">
-              <button type="button" name="MyClubs" id="myclubs" class="btn btn-success btn-sm myclubs">MyClubs</button>              
-            </div>            
-            <table id="clubs_table" class="table table-bordered" style="width:100%">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+
+                        </div>
+                    @endif
+ <?php 
+$user_id =  Auth::user()->id ;
+ ?> 
+
+
+                        <div class="card-box table-responsive">
+<div class="row">
+                    <div class="col-12">         
+                            <table id="clubs_table" class="table table-hover " cellspacing="0" width="100%">
               <thead>
                 <tr>
                   <th>#</th>
@@ -49,7 +78,7 @@
             </table>
 <hr><br><br><hr>
 <h3>Club History</h3>
-<table id="history_table" class="table table-bordered" style="width:100%">
+<table id="history_table" class="table table-hover" style="width:100%">
               <thead>
                 <tr>
                   <th>Club Name</th>
@@ -60,8 +89,8 @@
               </thead>
             </table>
 
-          </div>
-                
+          </div></div>
+                </div></div>
 <!-- Modal of MyClubs -->
 <div class="modal" id="myclubs_Modal" tabindex="-1" role="dialog" aria-labelledby="myclubs_ModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
@@ -89,10 +118,20 @@
 {!! dd(" YOU ARE NOT LOGGED IN ") !!}
 
 @endif
+
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
     // toastr.success("Table Data Loaded Succesfully", "Success!");
-     $(document).ready(function() {
+     $(document).ready(function() {      
      $('#clubs_table').DataTable( {
+       "lengthChange": true,
+                    "buttons": ['copy', 'excel', 'pdf'],
          "processing": true,
          "serverSide": true,
          "ajax": "{{ route('clubs.getdata') }}",
@@ -103,8 +142,8 @@
            { "data": "action", orderable:false, searchable: false}
          ],
        //  "order": [[1, 0]]
-       });
-     
+       });     
+
 $(document).on('click', '.enroll', function(e){
   var id = $(this).attr("id");
        var user_id ={{ Auth::user()->id}};

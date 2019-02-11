@@ -117,16 +117,18 @@ public function admin_view()
      ->join('clubs','clubs.id','=','clubs_registrations.club_id')
      ->select('clubs_registrations.id', 'users.name','clubs.club_name', 'clubs_registrations.status');
             return Datatables::of($admin_view)
+
+
             ->addColumn('action', function ($admin)
            {
                     if($admin->status == 'pending'){
                     return '<a href="#" class="btn btn-xs btn-warning approve" id='.$admin->id.'><i class="glyphicon glyphicon-plus"></i> Approve</a>
-<a href="#" class="btn btn-xs btn-danger deny" id='.$admin->id.'><i class="glyphicon glyphicon-plus"></i> Deny</a>
+<a href="#" class="btn btn-xs btn-danger deny" id='.$admin->id.'><i class="glyphicon glyphicon-remove"></i> Deny</a>
 
                     '  ;}
                     if($admin->status == 'approved'){
                     return '
-<a href="#" class="btn btn-xs btn-danger deny" id='.$admin->id.'><i class="glyphicon glyphicon-plus"></i> Deny</a>
+<a href="#" class="btn btn-xs btn-danger deny" id='.$admin->id.'><i class="glyphicon glyphicon-remove"></i> Deny</a>
 
                     '  ;}
                     if($admin->status == 'denied'){
