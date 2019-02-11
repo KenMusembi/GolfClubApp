@@ -1,3 +1,12 @@
+@if (Auth::check())
+<?php
+if(Auth::user()->id != 508){
+      echo "You must be logged in as an admin to access this page";
+      echo "<a href='login' >LogIn</a> ";
+       return Redirect::to('login')->with('message', 'Login Failed');
+       echo "You";
+}?>
+@extends('layouts.master')
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,13 +36,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
 </head>
 <body>
-
+<br><br><br><br><br><br>
 <div class="container">
 <h4 align="center">Golf Club App</h4>
 <div align="right">
-  <button type="button" name="add" id="add_data" class="btn btn-success btn-sm">Add</button>
+  <button type="button" name="add" id="add_data" class="btn btn-success btn-sm">Add</button><br>
 </div>
-<br />
 <table id="user_table" class="table table-bordered" style="width:100%">
   <thead>
     <tr>
@@ -47,13 +55,13 @@
 </div>
 
 <!-- Modal of edit and add -->
-<div id="userModal" class="modal fade" role="dialog">
+<div id="userModal" class="modal" role="dialog">
 <div class="modal-dialog">
   <div class="modal-content">
     <form method="post" id="user_form">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add Data</h4>
+        <h4 class="modal-title">Add Data</h4><br>
       </div>
       <div class="modal-body">
         {{csrf_field()}}
@@ -139,7 +147,11 @@
   </div>
 </div>
 </div>
+@else
+<a href="login">Login Here</a>
+{!! dd(" YOU ARE NOT LOGGED IN ") !!}
 
+@endif
 <script type="text/javascript">
 $(document).ready(function() {
 $('#user_table').DataTable({

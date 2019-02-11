@@ -29,15 +29,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
 </head>
 <body>
-                  <br><br><br><br><br><br><br>
+                  <br><br><br><br><br><br>
           <div class="container"><br>
              <?php $user_id =  Auth::user()->id ; ?></h4>
             <h4 align="center">Golf Club App - {{Auth::user()->name}} Dashboard</h4>
 
             <div align="right">
               <button type="button" name="MyClubs" id="myclubs" class="btn btn-success btn-sm myclubs">MyClubs</button>              
-            </div>
-            <br />
+            </div>            
             <table id="clubs_table" class="table table-bordered" style="width:100%">
               <thead>
                 <tr>

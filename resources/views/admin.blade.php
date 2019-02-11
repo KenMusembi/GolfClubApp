@@ -63,7 +63,7 @@ $user_id =  Auth::user()->id ;
       <th>User Name</th>
       <th>Club Name</th>
       <th>Status</th>
-      <th style="width:150px" style="align:center">Action</th>
+      <th style="width:180px" style="align:center">Action</th>
       <input type="hidden" name="club_enroll_id" id="club_enroll_id" class="form-control" />
     </tr>
   </thead>
@@ -132,12 +132,12 @@ e.preventDefault();
         })
       });
     } else {
-      swal("Denied", "You have Denied User to Enroll from Club:)", "error");
-    }
+      swal("Denied", "You have Denied User to Enroll to Club:)", "error");
+    }$('#admin_table').DataTable().ajax.reload();
   });
 });
 //script for the deny function
-$(document).on('click', '.deny', function(e){
+$(document).on('click', '.deny', function(e){   
   var id = $(this).attr("id");
       // var user_id ={{ Auth::user()->id}};
 e.preventDefault();
@@ -162,17 +162,14 @@ e.preventDefault();
           method:"get",
           data:{id:id},
           success:function(data)
-          {
-            //toastr.success('User Already Deleted', 'User Deleted')
-            //  alert(data);
-            $('#club_enroll_id').val(data.enroll_user_id);
+          {            
             $('#admin_table').DataTable().ajax.reload();
           }
         })
       });
     } else {
       swal("Aborted", "You have Aborted this operation:)", "error");
-    }
+    }$('#admin_table').DataTable().ajax.reload();
   });
 });
 });
