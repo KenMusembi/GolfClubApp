@@ -49,7 +49,7 @@ Route::get('admin/admin_view', 'ClubsController@admin_view')->name('admin.admin_
 Route::get('admin_deny', 'ClubsController@admin_deny')->name('admin_deny');
 
 Route::resource('users', 'UsersController');
-Route::resource('clubs', 'ClubsController');
+Route::get('notify/index', 'NotificationController@index');
 
 Route::get('/', function () {
     return view('home');
@@ -58,3 +58,15 @@ Route::get('/', function () {
 Route::get('profile', function () {
     return view('profile');
 });
+
+
+Broadcast::channel('App.User.{id}', function ($user, $id) {
+    return (int) $user->id === (int) $id;
+});
+ 
+Broadcast::channel('user.{toUserId}', function ($user, $toUserId) {
+    return $user->id == $toUserId;
+});
+
+Route::get('message/index', 'MessageController@index');
+Route::get('message/send', 'MessageController@send');

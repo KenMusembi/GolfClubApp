@@ -35,8 +35,30 @@ return View('clubs');
 
  public function index2()
     {   
+      $users = User::select(DB::raw("COUNT(id) as user"))->get()->toArray();
+      $users = array_column($users, 'user'); 
+
+      $data = ClubsRegistration::select(DB::raw("COUNT(id) as counts"))
+        //->orderBy("status")
+        ->groupBy(DB::raw("status"))
+        
+        ->get()->toArray();
+    $data = array_column($data, 'counts');  
+
+
+ $viewer = ClubsRegistration::select(DB::raw("COUNT(club_id) as count"))
+        ->orderBy("club_id")
+        ->groupBy(DB::raw("club_id"))
+        
+        ->get()->toArray();
+    $viewer = array_column($viewer, 'count');           
+
+    return view('admin')
+            ->with('viewer',json_encode($viewer,JSON_NUMERIC_CHECK))->with('data',json_encode($data,JSON_NUMERIC_CHECK))->with('users',json_encode($users,JSON_NUMERIC_CHECK)); 
+
 
 return View('admin');
+
     }
 
 
@@ -201,7 +223,6 @@ Mail::send('emails.deny', $data, function($message) use ($to_email) {
 });
 
     }
-
     public function create()
     {
         //

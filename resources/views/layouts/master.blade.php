@@ -25,6 +25,7 @@
 <!--datatable links -->
 
         <script src="js/modernizr.min.js"></script>
+    </head>
 <body>
 
         <!-- Navigation Bar-->
@@ -141,6 +142,8 @@
                             </li>
 
                            
+
+                           
                                 </ul>
                             </li>
                         </ul>
@@ -172,9 +175,9 @@
         <![endif]-->
         <script src="plugins/jquery-knob/jquery.knob.js"></script>
 
-        <!--Morris Chart-->
-        <script src="plugins/morris/morris.min.js"></script>
-        <script src="plugins/raphael/raphael-min.js"></script>
+        <!-- Chart JS -->
+        <script src="assets/plugins/chart.js/Chart.bundle.min.js"></script>
+        <script src="assets/pages/jquery.chartjs.init.js"></script>
 
         <!-- Dashboard init -->
         <script src="pages/jquery.dashboard.js"></script>

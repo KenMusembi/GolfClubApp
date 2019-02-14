@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "admin-lte": "^2.4.8",
+        "laravel-echo": "^1.5.2",
         "npm": "^6.7.0",
         "sweetalert": "^2.1.2"
     }

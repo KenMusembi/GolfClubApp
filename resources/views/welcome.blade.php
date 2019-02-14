@@ -83,13 +83,18 @@ $user_id =  Auth::user()->id ;
 
 
 <!-- Modal of edit and add -->
-<div id="userModal" class="modal" role="dialog">
+<div id="userModal" class="modal" role="dialog"> 
 <div class="modal-dialog">
-  <div class="modal-content">
+  <div class="modal-content">    
     <form method="post" id="user_form">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add Data</h4><br>
+       
+      <div class="card m-b-32"><h4>Update User Details</h4>
+                               <img src="images/1026.jpg" class="card-img-top img-fluid"
+                                      alt="profile-image">
+                                </div>
+                            
+   
       </div>
       <div class="modal-body">
         {{csrf_field()}}
@@ -123,11 +128,13 @@ $user_id =  Auth::user()->id ;
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="viewModalLabel">View Clubs</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+
+      <div class="card m-b-24"><h4>View Clubs</h4>
+                               <img src="images/1026.jpg" class="card-img-top img-fluid"
+                                      alt="profile-image">
+                                </div>
+                            
+    </div> 
     <div class="modal-body">{{csrf_field()}}
       <p>No Clubs</p>
     </div>
@@ -145,7 +152,8 @@ $user_id =  Auth::user()->id ;
    
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hiden="true"></button>
-        <h3 class="modal-title mt-0 " align="center">Enroll To Club</h3><br>        
+        <h3 class="modal-title mt-0 " align="center">Enroll To Club</h3><br>   
+
       </div>
       <div class="modal-body">
         {{csrf_field()}}

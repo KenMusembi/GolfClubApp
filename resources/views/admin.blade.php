@@ -28,10 +28,10 @@ if(Auth::user()->id != 508){
 <script src="https://cdn.datatables.net/buttons/1.5.0/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/select/1.2.4/js/dataTables.select.min.js"></script>
 
-<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script> 
 <script src="https://cdn.datatables.net/buttons/1.5.0/js/buttons.bootstrap.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
 </head>
@@ -86,7 +86,7 @@ $user_id =  Auth::user()->id ;
                                 </div>
 
                                 <div class="widget-detail-1">
-                                    <h2 class="p-t-10 mb-0"> 512 </h2>
+                                    <h2 class="p-t-10 mb-0"> {{$users}} </h2>
                                     <p class="text-muted m-b-10">Users</p>
                                 </div>
                             </div>
@@ -213,9 +213,23 @@ $user_id =  Auth::user()->id ;
                                 </div>
                             </div>
                         </div>
-                    </div><!-- end col -->                    
-</div>
+                    </div><!-- end col -->   
 
+                    </div>
+                    <div class="row">
+                      
+                        <div class="card-box">
+<h4 class="header-title mt-0 m-b-30">Club Intake Chart</h4>
+                    <canvas id="canvas" height="300" width="580"></canvas>
+                                              
+</div>
+&nbsp
+<div class="card-box">
+<h4 class="header-title mt-0 m-b-30">Club Approvl Chart</h4>
+                    <canvas id="canvas2" height="300" width="600"></canvas>
+
+                    </div><!-- end col -->    
+</div>
 
 <div class="card-box">
      <h4 class="header-title mt-0 m-b-30">User Enrollment</h4>
@@ -332,4 +346,95 @@ e.preventDefault();
   });
 });
 });
+
+
 </script>
+
+<script>
+    var club = ['Mara','Mamba','Maasai', 'Samburu', 'Olive', 'Razors', 'Warriors', 'Golag', 'Archipelo', 'Buffalo'];
+    
+    var data_viewer = <?php echo $viewer; ?>;
+
+
+    var barChartData = {
+        labels: club,
+        datasets: [ {
+            label: 'No. of members per club',
+            backgroundColor: "rgba(151,187,205,0.5)",
+            data: data_viewer
+        }]
+    };
+
+
+    window.onload = function() {
+        var ctx = document.getElementById("canvas").getContext("2d");
+        window.myBar = new Chart(ctx, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                elements: {
+                    rectangle: {
+                        borderWidth: 2,
+                        borderColor: 'rgb(0, 255, 0)',
+                        borderSkipped: 'bottom'
+                    }
+                },
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Club Membership'
+                }
+            }
+        });
+
+
+
+
+    var statuss = ['approved','pending','denied'];
+    
+    var data_viewers = <?php echo $data; ?>;
+
+
+    var lineChartData = {
+        labels: statuss,
+        datasets: [ {
+            label: 'enrollment per club',
+            backgroundColor: [
+                'rgba(255, 0, 0, 0.8)',
+                'rgba(54, 162, 235, 0.2)',                
+                'rgb(255, 214, 51)'
+            ],
+            data: data_viewers
+        }]
+    };
+
+
+    
+        var ctxs = document.getElementById("canvas2").getContext("2d");
+        window.myBars = new Chart(ctxs, {
+            type: 'pie',
+            data: lineChartData,
+            options: {
+                elements: {
+                    rectangle: {
+                        borderWidth: 2,                        
+                       borderColor: [                
+                'rgba(255, 159, 64, 1)'
+            ],
+                        borderSkipped: 'bottom'
+                    }
+                },
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Club Enrollment'
+                }
+            }
+        });
+
+
+    };
+</script>
+
+
+
